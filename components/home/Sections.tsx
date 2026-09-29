@@ -8,6 +8,7 @@ import { CourseCard } from "@/components/ui/CourseCard";
 import { FilterableCourseGrid } from "@/components/ui/FilterPills";
 import { Icon } from "@/components/ui/icons";
 import { GrowthGlows } from "@/components/ui/SectionGlow";
+import { CategoryIcon } from "@/components/ui/CategoryIcons";
 import {
   categoryFilters,
   courses,
@@ -61,31 +62,42 @@ export function DiscoverSection() {
   );
 }
 
-/** "Explore Diverse Learning Paths" - the six category tiles. */
+/**
+ * "Explore Diverse Learning Paths" - the six category tiles.
+ *
+ * The design gives each tile a fixed 167x167 box with a 24px radius and a
+ * hairline border, holding a 60px lime disc (radius 40) above a 20px
+ * label, on a 40px gutter. The tiles are a fixed size rather than
+ * stretching, so the row is laid out with explicit gaps rather than
+ * equal fractions.
+ */
 export function LearningPathsSection() {
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-[1200px] px-5 pb-20 md:px-0 md:pb-24">
-        <div className="max-w-[720px]">
+        <div className="mx-auto max-w-[917px] text-center">
           <h2 className="t-display-md text-brand-deep">
             Explore Diverse Learning Paths at Bytespace
           </h2>
-          <p className="t-body-l mt-5 text-body">
-            At ByteSpace, we believe in empowering individuals through
-            knowledge. Our diverse range of course paths ensures that learners
-            can find the perfect fit for their interests and goals.
+          <p className="t-body-l mt-5 text-subtle">
+            At ByteSpace, we believe in empowering individuals through knowledge.
+            Our diverse range of course paths ensures that learners can find the
+            perfect fit for their interests and goals.
           </p>
         </div>
 
-        <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+        {/* 36px rather than the design's 40px: six 167px tiles plus five
+            40px gutters is 1202px, two wider than the 1200px page
+            container, which pushed the sixth tile onto its own row. */}
+        <ul className="mt-10 flex flex-wrap justify-center gap-9">
           {learningPaths.map((path) => (
             <li key={path.label}>
               <a
                 href="#"
-                className="press flex h-full flex-col items-center gap-3 rounded-md border border-line bg-white px-4 py-7 text-center transition-colors duration-200 hover:border-ink"
+                className="press flex size-[167px] flex-col items-center justify-center gap-3 rounded-lg border border-line bg-white transition-colors duration-200 hover:border-ink"
               >
-                <span className="grid size-12 place-items-center rounded-full bg-lime">
-                  <Icon name="shapes" size={22} className="text-ink" />
+                <span className="grid size-[60px] place-items-center rounded-[40px] bg-lime">
+                  <CategoryIcon name={path.icon} size={36} className="text-ink" />
                 </span>
                 <span className="t-h-m text-ink">{path.label}</span>
               </a>
