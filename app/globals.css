@@ -66,6 +66,13 @@
     -webkit-text-size-adjust: 100%;
   }
 
+  html,
+  body {
+    /* Decorative ornaments are absolutely positioned past the edges on
+       purpose; the page itself must never scroll sideways. */
+    overflow-x: clip;
+  }
+
   body {
     background: #fff;
     color: var(--color-ink);
@@ -81,29 +88,109 @@
 }
 
 @layer components {
-  /* --- Display: Poppins 600, tight tracking ----------------------------- */
-  .t-display-xl { font: 600 72px/1.2 var(--font-poppins); letter-spacing: -0.72px; }
-  .t-display-lg { font: 600 44px/1.2 var(--font-poppins); letter-spacing: -0.44px; }
-  .t-display-md { font: 600 36px/1.2 var(--font-poppins); letter-spacing: -0.36px; }
-  .t-display-sm { font: 600 24px/1.333 var(--font-poppins); letter-spacing: -0.24px; }
-  .t-display-xs { font: 600 20px/1.2 var(--font-poppins); letter-spacing: -0.2px; }
+  /* Sizes are the Figma values at 1440, and clamp down to a readable
+     minimum on small screens. Tracking is expressed in em because every
+     display step in the source uses -1% of its own font size
+     (0.72px at 72px, 0.44px at 44px, ...), so one rule covers them all. */
+
+  /* --- Display: Poppins 600 --------------------------------------------- */
+  .t-display-xl {
+    font-family: var(--font-poppins);
+    font-weight: 600;
+    font-size: clamp(30px, 5.2vw, 72px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .t-display-lg {
+    font-family: var(--font-poppins);
+    font-weight: 600;
+    font-size: clamp(26px, 3.3vw, 44px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .t-display-md {
+    font-family: var(--font-poppins);
+    font-weight: 600;
+    font-size: clamp(22px, 2.6vw, 36px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .t-display-sm {
+    font-family: var(--font-poppins);
+    font-weight: 600;
+    font-size: clamp(19px, 1.9vw, 24px);
+    line-height: 1.333;
+    letter-spacing: -0.01em;
+  }
+  .t-display-xs {
+    font-family: var(--font-poppins);
+    font-weight: 600;
+    font-size: clamp(17px, 1.6vw, 20px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
 
   /* --- Headings: Satoshi ------------------------------------------------ */
-  .t-h-l { font: 500 24px/1.35 var(--font-satoshi); }
-  .t-h-m { font: 500 20px/1.2 var(--font-satoshi); }
-  .t-h-s { font: 500 18px/1.2 var(--font-satoshi); }
+  .t-h-l {
+    font-family: var(--font-satoshi);
+    font-weight: 500;
+    font-size: clamp(20px, 1.9vw, 24px);
+    line-height: 1.35;
+  }
+  .t-h-m {
+    font-family: var(--font-satoshi);
+    font-weight: 500;
+    font-size: clamp(18px, 1.7vw, 20px);
+    line-height: 1.2;
+  }
+  .t-h-s {
+    font-family: var(--font-satoshi);
+    font-weight: 500;
+    font-size: clamp(17px, 1.6vw, 18px);
+    line-height: 1.2;
+  }
 
   /* --- Body: Satoshi ---------------------------------------------------- */
-  .t-body-l { font: 400 16px/1.6 var(--font-satoshi); }
-  .t-body-m { font: 400 14px/1.6 var(--font-satoshi); }
-  .t-body-s { font: 400 12px/1.6 var(--font-satoshi); }
+  .t-body-l {
+    font-family: var(--font-satoshi);
+    font-weight: 400;
+    font-size: clamp(15px, 1.3vw, 16px);
+    line-height: 1.6;
+  }
+  .t-body-m {
+    font-family: var(--font-satoshi);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .t-body-s {
+    font-family: var(--font-satoshi);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.6;
+  }
 
   /* --- Labels: Satoshi medium ------------------------------------------- */
-  .t-label { font: 500 12px/1.2 var(--font-satoshi); }
-  .t-label-lg { font: 500 14px/1.2 var(--font-satoshi); }
+  .t-label {
+    font-family: var(--font-satoshi);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.2;
+  }
+  .t-label-lg {
+    font-family: var(--font-satoshi);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.2;
+  }
 
   /* --- Wordmark --------------------------------------------------------- */
-  .t-logo { font: 700 24px/1.23 var(--font-clash); }
+  .t-logo {
+    font-family: var(--font-clash);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.23;
+  }
 }
 
 /* ==========================================================================
