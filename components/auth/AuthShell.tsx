@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { Icon } from "@/components/ui/icons";
 import { TintedShape } from "@/components/ui/TintedShape";
 import { courses } from "@/lib/data";
@@ -8,16 +8,21 @@ import { courses } from "@/lib/data";
 /**
  * Shared shell for Sign in and Register, 1440x1024.
  *
- * The blue panel carries the pitch and two course cards scattered over
- * each other, with the form card sitting on the right. Card positions
- * and the ornament offsets are the design's, measured from the frame.
+ * The blue panel carries the pitch copy on the left, two course cards
+ * scattered over each other, the lime social-proof card and three
+ * ornaments, with the 579x784 form card on the right.
+ *
+ * Those scattered elements are positioned from the design's own frame
+ * coordinates rather than relative to the text, so they sit where the
+ * frame puts them however the copy above them wraps. They live in one
+ * layer constrained to the 1200px content column, which is why the
+ * x values are the design's minus the 120px gutter.
  */
 export function AuthShell({
   pitch,
   body,
   children,
 }: {
-  /** Small line above the pitch heading. */
   pitch: string;
   body: string;
   children: ReactNode;
@@ -34,58 +39,71 @@ export function AuthShell({
         }}
       />
 
-      <AuthHeader />
-
       <div className="relative mx-auto max-w-[1200px] px-5 md:px-0">
-        <div className="grid gap-10 lg:grid-cols-[1fr_579px] lg:gap-0">
-          {/* Left: pitch, scattered cards, social proof */}
-          <div className="relative min-h-[640px]">
-            <div className="max-w-[475px] pt-2">
-              <h1 className="t-display-xs text-on-dark">{pitch}</h1>
-              <p className="t-body-l mt-4 text-on-dark">{body}</p>
-            </div>
+        <div className="flex h-[120px] items-center">
+          <LogoOnly />
+        </div>
 
-            {/* Two cards, offset from each other as in the design */}
-            <div className="pointer-events-none absolute top-[185px] left-0 hidden w-[373px] lg:block">
-              <CardShell>
-                <AuthCourseCard index={1} dimmed />
-              </CardShell>
-            </div>
-            <div className="pointer-events-none absolute top-[96px] left-[111px] hidden w-[373px] lg:block">
-              <CardShell>
-                <AuthCourseCard index={0} />
-              </CardShell>
-            </div>
-
-            {/* Lime social-proof card */}
-            <div className="absolute top-[620px] left-[226px] hidden w-[258px] rounded-md bg-lime p-4 lg:block">
-              <p className="t-h-s text-ink">Happy Students</p>
-              <p className="text-[10px] text-[#424348]">4.5 (240)</p>
-              <div className="mt-2 flex items-center">
-                {STACK.map((src, i) => (
-                  <Image
-                    key={src}
-                    src={src}
-                    alt=""
-                    width={32}
-                    height={32}
-                    className="shrink-0 rounded-full object-cover ring-2 ring-lime"
-                    {...{ style: { marginLeft: i === 0 ? 0 : -8 } }}
-                  />
-                ))}
-                <span className="t-label ml-2 grid size-8 shrink-0 place-items-center rounded-full bg-ink text-[12px] font-bold text-on-dark">
-                  2K+
-                </span>
-              </div>
-            </div>
-
-            <AuthOrnaments />
+        <div className="grid gap-10 lg:grid-cols-[1fr_579px]">
+          {/* Left: pitch copy */}
+          <div className="max-w-[475px]">
+            <h1 className="t-display-xs text-on-dark">{pitch}</h1>
+            <p className="t-body-l mt-4 text-on-dark">{body}</p>
           </div>
 
           {/* Right: the form card */}
-          <div className="relative z-10 lg:pl-0">
+          <div className="relative z-10">
             <div className="rounded-lg bg-white p-9 shadow-e5">{children}</div>
           </div>
+        </div>
+
+        {/* Scattered cards, social proof and ornaments, in frame coordinates. */}
+        <div className="pointer-events-none absolute inset-0 hidden lg:block">
+          {/* Paint order follows the source frame: the lower-left card is
+              the earlier sibling, so the upper-right one sits over it. */}
+          <div className="absolute top-[394px] left-[2px] w-[373px] opacity-95">
+            <AuthCard index={1} />
+          </div>
+          <div className="absolute top-[305px] left-[113px] w-[373px]">
+            <AuthCard index={2} />
+          </div>
+
+          <div className="absolute top-[740px] left-[228px] w-[258px] rounded-md bg-lime p-4">
+            <p className="t-h-s text-ink">Happy Students</p>
+            <p className="text-[10px] text-[#424348]">4.5 (240)</p>
+            <div className="mt-2 flex items-center">
+              {STACK.map((src, i) => (
+                <Image
+                  key={src}
+                  src={src}
+                  alt=""
+                  width={32}
+                  height={32}
+                  className="shrink-0 rounded-full object-cover ring-2 ring-lime"
+                  {...{ style: { marginLeft: i === 0 ? 0 : -8 } }}
+                />
+              ))}
+              <span className="ml-2 grid size-8 shrink-0 place-items-center rounded-full bg-ink text-[12px] font-bold text-on-dark">
+                2K+
+              </span>
+            </div>
+          </div>
+
+          <TintedShape
+            src="/assets/hero-float-6.png"
+            tint="lime"
+            className="absolute top-[702px] left-[-23px] size-[188px]"
+          />
+          <TintedShape
+            src="/assets/hero-float-4.png"
+            tint="lime"
+            className="absolute top-[320px] left-[31px] size-[146px]"
+          />
+          <TintedShape
+            src="/assets/hero-float-3.png"
+            tint="white"
+            className="absolute top-[626px] left-[350px] size-[175px]"
+          />
         </div>
       </div>
     </section>
@@ -99,18 +117,13 @@ const STACK = [
   "/assets/avatar-08.png",
 ];
 
-/** Header sits above the split, spanning the full frame. */
-function AuthHeader() {
-  return (
-    <div className="relative mx-auto max-w-[1200px] px-5 py-8 md:px-0 md:py-10">
-      <LogoOnly />
-    </div>
-  );
-}
-
 function LogoOnly() {
   return (
-    <Link href="/" className="inline-flex items-center gap-[10px]" aria-label="ByteSpace home">
+    <Link
+      href="/"
+      className="inline-flex items-center gap-[10px]"
+      aria-label="ByteSpace home"
+    >
       <svg width="29" height="32" viewBox="0 0 29 32" aria-hidden="true">
         <path
           fill="#d4fb20"
@@ -121,31 +134,13 @@ function LogoOnly() {
   );
 }
 
-function CardShell({ children }: { children: ReactNode }) {
-  return <div className="overflow-hidden rounded-lg">{children}</div>;
-}
-
 /**
- * Course card for the auth panel. Same 373x384 card as the listing, with
- * the deep-purple price the design uses here and an optional dimmed card
- * for the one sitting behind.
+ * Course card for the auth panel. Same 373x384 card as the listing, but
+ * the auth frames carry the deep-purple price and a blue student chip
+ * rather than the lime one the listing uses.
  */
-function AuthCourseCard({
-  index,
-  dimmed = false,
-}: {
-  index: number;
-  dimmed?: boolean;
-}) {
+function AuthCard({ index }: { index: number }) {
   const course = courses[index] ?? courses[0];
-  return (
-    <div className={dimmed ? "opacity-90" : undefined}>
-      <AuthCard course={course} />
-    </div>
-  );
-}
-
-function AuthCard({ course }: { course: (typeof courses)[number] }) {
   return (
     <article className="flex h-[384px] w-[373px] flex-col overflow-hidden rounded-lg bg-white">
       <div className="relative mx-4 mt-4 h-[195px] shrink-0 overflow-hidden rounded-sm">
@@ -191,29 +186,6 @@ function AuthCard({ course }: { course: (typeof courses)[number] }) {
         </p>
       </div>
     </article>
-  );
-}
-
-/** Ornament offsets are the design's, measured from the 1440x1024 frame. */
-function AuthOrnaments() {
-  return (
-    <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-      <TintedShape
-        src="/assets/hero-float-6.png"
-        tint="lime"
-        className="absolute top-[702px] left-[97px] size-[188px]"
-      />
-      <TintedShape
-        src="/assets/hero-float-4.png"
-        tint="lime"
-        className="absolute top-[320px] left-[151px] size-[146px]"
-      />
-      <TintedShape
-        src="/assets/hero-float-3.png"
-        tint="white"
-        className="absolute top-[626px] left-[470px] size-[175px]"
-      />
-    </div>
   );
 }
 
@@ -269,7 +241,11 @@ export function SocialButtons() {
         <button
           key={name}
           type="button"
-          aria-label={name === "facebook" ? "Continue with Facebook" : "Continue with Google"}
+          aria-label={
+            name === "facebook"
+              ? "Continue with Facebook"
+              : "Continue with Google"
+          }
           className="press grid size-10 place-items-center rounded-full bg-white text-ink transition-colors duration-200 hover:bg-surface"
         >
           <Icon name={name} size={20} />
