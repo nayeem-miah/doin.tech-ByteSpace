@@ -1,26 +1,153 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ==========================================================================
+   ByteSpace design tokens
+   Values are taken verbatim from the Figma file (node tree + published
+   styles), not eyeballed. See `python scripts/figma_extract.py tokens`.
+
+   The Figma design is light-mode only, so there is deliberately no
+   prefers-color-scheme inversion here: this project is a 1:1 replica and
+   a dark variant would break fidelity with the source design.
+   ========================================================================== */
+
+@theme {
+  /* --- Brand ------------------------------------------------------------ */
+  --color-brand: #003be2;          /* "Electric Violet" - primary blue      */
+  --color-brand-deep: #040819;     /* deepest navy                          */
+  --color-purple: #300b6a;
+  --color-lime: #d4fb20;           /* "Electric Lime" - accent              */
+  --color-lime-soft: #f2ff92;
+  --color-lime-pale: #e4ff54;
+  --color-teal: #64e4d0;
+
+  /* --- Ink / surfaces --------------------------------------------------- */
+  --color-ink: #242528;            /* primary text, 349 uses                */
+  --color-body: #4f4f4f;           /* body copy, 256 uses                   */
+  --color-muted: #4b4c53;          /* secondary text, 238 uses              */
+  --color-subtle: #82868e;         /* muted / meta, 73 uses                 */
+  --color-line: #ced0d3;           /* hairlines                             */
+  --color-line-soft: #e5e6e8;
+  --color-surface: #f5f5f6;
+  --color-surface-2: #fafafa;
+  --color-on-dark: #f5f5f6;
+  --color-on-dark-muted: rgb(246 246 246 / 0.6);
+
+  /* --- Radii (Figma uses 8 / 12 / 16 / 24 / 40 / pill) ------------------ */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 40px;
+
+  /* --- Elevation: the file's 8-step shadow ladder ----------------------- */
+  --shadow-e1: 0 1px 3px rgb(0 0 0 / 0.04);
+  --shadow-e2: 0 3px 6px rgb(0 0 0 / 0.06);
+  --shadow-e3: 0 8px 10px rgb(0 0 0 / 0.07);
+  --shadow-e4: 0 15px 16px rgb(0 0 0 / 0.08);
+  --shadow-e5: 0 24px 24px rgb(0 0 0 / 0.09);
+  --shadow-e6: 0 37px 36px rgb(0 0 0 / 0.1);
+  --shadow-e7: 0 53px 56px rgb(0 0 0 / 0.11);
+  --shadow-e8: 0 73px 72px rgb(0 0 0 / 0.13);
+
+  /* --- Motion (see emil-design-eng) ------------------------------------ */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ==========================================================================
+   Type scale
+   Satoshi carries body and UI, Poppins carries display, Clash Display is the
+   wordmark. Sizes / line-heights / tracking are the Figma values.
+   ========================================================================== */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: #fff;
+    color: var(--color-ink);
+    font-family: var(--font-satoshi), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--color-lime);
+    color: var(--color-ink);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* --- Display: Poppins 600, tight tracking ----------------------------- */
+  .t-display-xl { font: 600 72px/1.2 var(--font-poppins); letter-spacing: -0.72px; }
+  .t-display-lg { font: 600 44px/1.2 var(--font-poppins); letter-spacing: -0.44px; }
+  .t-display-md { font: 600 36px/1.2 var(--font-poppins); letter-spacing: -0.36px; }
+  .t-display-sm { font: 600 24px/1.333 var(--font-poppins); letter-spacing: -0.24px; }
+  .t-display-xs { font: 600 20px/1.2 var(--font-poppins); letter-spacing: -0.2px; }
+
+  /* --- Headings: Satoshi ------------------------------------------------ */
+  .t-h-l { font: 500 24px/1.35 var(--font-satoshi); }
+  .t-h-m { font: 500 20px/1.2 var(--font-satoshi); }
+  .t-h-s { font: 500 18px/1.2 var(--font-satoshi); }
+
+  /* --- Body: Satoshi ---------------------------------------------------- */
+  .t-body-l { font: 400 16px/1.6 var(--font-satoshi); }
+  .t-body-m { font: 400 14px/1.6 var(--font-satoshi); }
+  .t-body-s { font: 400 12px/1.6 var(--font-satoshi); }
+
+  /* --- Labels: Satoshi medium ------------------------------------------- */
+  .t-label { font: 500 12px/1.2 var(--font-satoshi); }
+  .t-label-lg { font: 500 14px/1.2 var(--font-satoshi); }
+
+  /* --- Wordmark --------------------------------------------------------- */
+  .t-logo { font: 700 24px/1.23 var(--font-clash); }
+}
+
+/* ==========================================================================
+   Motion
+   ========================================================================== */
+
+@layer utilities {
+  /* Press feedback, gated so touch devices do not fire phantom hovers. */
+  @media (hover: hover) and (pointer: fine) {
+    .press {
+      transition: transform 160ms var(--ease-out);
+    }
+    .press:hover {
+      transform: translateY(-1px);
+    }
+    .press:active {
+      transform: scale(0.97);
+    }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 600ms var(--ease-out),
+      transform 600ms var(--ease-out);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+  }
 }
