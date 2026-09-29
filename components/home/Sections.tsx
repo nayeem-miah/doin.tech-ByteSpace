@@ -9,7 +9,7 @@ import { FilterableCourseGrid } from "@/components/ui/FilterPills";
 import { Icon } from "@/components/ui/icons";
 import { GrowthGlows } from "@/components/ui/SectionGlow";
 import {
-  categoryFilterRows,
+  categoryFilters,
   courses,
   creatorBenefits,
   learningPaths,
@@ -43,7 +43,7 @@ export function DiscoverSection() {
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-[1200px] px-5 py-20 md:px-0 md:py-24">
-        <div className="mx-auto max-w-[720px] text-center">
+        <div className="max-w-[720px]">
           <h2 className="t-display-lg text-brand-deep text-center">
             Discover Your Passion, Build Your Skills
           </h2>
@@ -55,7 +55,7 @@ export function DiscoverSection() {
           </p>
         </div>
 
-        <FilterableCourseGrid rows={categoryFilterRows} courses={courses} />
+        <FilterableCourseGrid rows={[categoryFilters]} courses={courses} />
       </div>
     </section>
   );
