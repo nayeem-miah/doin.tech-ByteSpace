@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import {
+  AuthField,
+  AuthKicker,
   AuthShell,
-  AuthSwitch,
-  Field,
-  SocialAuth,
-} from "@/components/layout/AuthForm";
+} from "@/components/auth/AuthShell";
 import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = { title: "Register" };
@@ -12,39 +12,44 @@ export const metadata: Metadata = { title: "Register" };
 export default function RegisterPage() {
   return (
     <AuthShell
-      title="Register"
-      subtitle="Join ByteSpace and start building your career alongside a community of learners and creators."
-      footer={
-        <AuthSwitch
-          prefix="Already have an account?"
-          href="/login"
-          label="Sign In"
-        />
-      }
+      pitch="Sign up and come in"
+      body="The registration process is straightforward, uncomplicated, and efficient, allowing users to sign up quickly using your email address."
     >
-      <form className="flex flex-col gap-6" action="#">
-        <Field id="name" label="Full name" placeholder="Enter your full name" />
-        <Field id="email" label="Email" type="email" placeholder="Enter your email" />
-        <Field
-          id="password"
-          label="Password"
-          type="password"
-          placeholder="Create a password"
-          hint="Use at least 8 characters with a number and a symbol."
-        />
-        <label className="t-body-m flex items-start gap-2 text-body">
-          <input
-            type="checkbox"
-            name="terms"
-            className="mt-1 size-4 shrink-0 rounded border-line accent-[#003be2]"
+      <div className="flex flex-col gap-8">
+        <div>
+          <AuthKicker>Create an Account</AuthKicker>
+          <h2 className="t-display-lg mt-2 text-ink">Welcome to ByteSpace</h2>
+        </div>
+
+        <form className="flex flex-col gap-6" action="#">
+          <AuthField id="name" label="Full Name" placeholder="Jamie Davis" />
+          <AuthField
+            id="email"
+            label="Email"
+            type="email"
+            placeholder="designer@example.com"
           />
-          I agree to the Terms of Service and Privacy Policy.
-        </label>
-        <Button type="submit" variant="primary" size="lg" className="w-full">
-          Create Account
-        </Button>
-      </form>
-      <SocialAuth />
+          <AuthField
+            id="password"
+            label="Password"
+            type="password"
+            placeholder="********"
+          />
+          <Button type="submit" variant="lime" size="md" className="self-end">
+            Continue
+          </Button>
+        </form>
+
+        <p className="t-body-l self-center text-body">
+          Already have an account?{" "}
+          <Link
+            href="/login"
+            className="text-brand transition-colors hover:text-brand-deep"
+          >
+            Login
+          </Link>
+        </p>
+      </div>
     </AuthShell>
   );
 }
