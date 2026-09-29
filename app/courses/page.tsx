@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CourseCard } from "@/components/ui/CourseCard";
 import { FilterPill } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { SearchField } from "@/components/ui/SearchField";
 import { Icon } from "@/components/ui/icons";
 import { categoryFilters, courses } from "@/lib/data";
 
@@ -19,28 +20,7 @@ export default function CoursesPage() {
         title="Search "
         subtitle="Unlock your creativity, gain valuable knowledge, and grow your business with our wide range of courses."
       >
-        <form className="mt-9 flex max-w-[581px] flex-col gap-3 sm:flex-row" action="#">
-          <label htmlFor="search-q" className="sr-only">
-            Search courses
-          </label>
-          <div className="relative flex-1">
-            <Icon
-              name="search"
-              size={18}
-              className="absolute top-1/2 left-4 -translate-y-1/2 text-subtle"
-            />
-            <input
-              id="search-q"
-              name="q"
-              type="search"
-              placeholder="Course, topic, creator"
-              className="t-body-l placeholder:text-subtle h-[52px] w-full rounded-full border border-transparent bg-white pr-4 pl-11 text-ink transition-colors duration-200 focus:border-lime focus:outline-none"
-            />
-          </div>
-          <Button type="submit" variant="lime" size="lg">
-            Search
-          </Button>
-        </form>
+        <SearchField id="search-q" className="mt-9 max-w-[581px]" />
       </PageHeader>
 
       <main className="bg-white">

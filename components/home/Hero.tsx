@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/Button";
+import { SearchField } from "@/components/ui/SearchField";
 import { Icon } from "@/components/ui/icons";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { HeroOrnaments } from "./HeroOrnaments";
@@ -29,28 +29,7 @@ export function Hero() {
           business with our wide range of courses.
         </p>
 
-        <form className="mt-8 flex w-full max-w-[581px] flex-col gap-3 sm:flex-row" action="/courses">
-          <label htmlFor="hero-search" className="sr-only">
-            Search courses
-          </label>
-          <div className="relative flex-1">
-            <Icon
-              name="search"
-              size={18}
-              className="absolute top-1/2 left-4 -translate-y-1/2 text-subtle"
-            />
-            <input
-              id="hero-search"
-              name="q"
-              type="search"
-              placeholder="Course, topic, creator"
-              className="t-body-l placeholder:text-subtle h-[52px] w-full rounded-full bg-white pr-4 pl-11 text-ink transition-colors duration-200 focus:ring-2 focus:ring-lime focus:outline-none"
-            />
-          </div>
-          <Button type="submit" variant="lime" size="lg">
-            Search
-          </Button>
-        </form>
+        <SearchField id="hero-search" className="mt-8 max-w-[581px]" />
 
         {/* Person + floating proof cards */}
         <div className="relative mt-6 h-[560px] w-full md:mt-10 md:h-[600px]">
