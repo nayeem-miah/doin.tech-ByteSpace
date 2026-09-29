@@ -13,20 +13,32 @@ const CARD_AVATARS = [
 
 /**
  * Course card: 373x384, white, 24px radius, hairline border.
- * Layout is a 341x195 thumbnail (with a translucent meta-pill row pinned
- * to its bottom edge) over a 16px-padded body.
+ *
+ * The height is fixed rather than content-driven. In the Figma grid every
+ * card is exactly 384px, and letting a one-line title sit next to a
+ * two-line one would make the row ragged.
  */
-export function CourseCard({ course }: { course: Course }) {
+export function CourseCard({
+  course,
+  priority = false,
+}: {
+  course: Course;
+  priority?: boolean;
+}) {
   return (
-    <article className="press group flex flex-col overflow-hidden rounded-lg border border-line bg-white">
-      <Link href={`/courses/${course.slug}`} className="flex flex-1 flex-col">
-        {/* Thumbnail */}
-        <div className="relative mx-4 mt-4 h-[195px] overflow-hidden rounded-sm">
+    <article className="press group h-full w-full">
+      <Link
+        href={`/courses/${course.slug}`}
+        className="flex h-full w-full flex-col overflow-hidden rounded-lg border border-line bg-white"
+      >
+        {/* Thumbnail: 341x195 at 16px inset, 12px radius */}
+        <div className="relative mx-4 mt-4 h-[195px] shrink-0 overflow-hidden rounded-sm">
           <Image
             src={course.thumb}
             alt=""
             fill
-            sizes="(max-width: 768px) 100vw, 373px"
+            priority={priority}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 373px"
             className="object-cover"
           />
           <ul className="absolute bottom-3 left-3 flex gap-3">
@@ -40,9 +52,7 @@ export function CourseCard({ course }: { course: Course }) {
         <div className="flex flex-1 flex-col gap-4 p-4">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
-              <h3 className="t-display-xs truncate text-ink">
-                {course.title}
-              </h3>
+              <h3 className="t-display-xs truncate text-ink">{course.title}</h3>
               <p className="t-body-s mt-1 text-body">by {course.author}</p>
             </div>
             <span className="t-h-s flex shrink-0 items-center gap-0.5 text-body">

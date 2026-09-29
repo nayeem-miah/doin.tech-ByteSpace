@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CourseCard } from "@/components/ui/CourseCard";
-import { FilterPill } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { SearchField } from "@/components/ui/SearchField";
 import { Icon } from "@/components/ui/icons";
@@ -26,11 +25,18 @@ export default function CoursesPage() {
       <main className="bg-white">
         <div className="mx-auto max-w-[1200px] px-5 py-16 md:px-0 md:py-20">
           <div className="flex flex-col gap-6 border-b border-line pb-8 sm:flex-row sm:items-center sm:justify-between">
-            <ul className="flex flex-wrap gap-3">
+            <ul className="flex flex-wrap gap-4">
               {categoryFilters.slice(0, 7).map((c, i) => (
-                <FilterPill key={c} active={i === 0}>
-                  {c}
-                </FilterPill>
+                <li key={c}>
+                  <span
+                    className={[
+                      "t-body-l block rounded-full px-4 py-3 font-medium",
+                      i === 0 ? "bg-lime text-ink" : "bg-surface text-muted",
+                    ].join(" ")}
+                  >
+                    {c}
+                  </span>
+                </li>
               ))}
             </ul>
             <button

@@ -24,26 +24,3 @@ export function Badge({
     </span>
   );
 }
-
-/** The category filter pill row under "Discover Your Passion". */
-export function FilterPill({
-  children,
-  active = false,
-}: {
-  children: ReactNode;
-  active?: boolean;
-}) {
-  return (
-    <button
-      type="button"
-      className={[
-        "press t-label-lg shrink-0 rounded-full border px-5 py-2.5",
-        active
-          ? "border-brand bg-brand text-white"
-          : "border-line bg-white text-muted hover:border-ink hover:text-ink",
-      ].join(" ")}
-    >
-      {children}
-    </button>
-  );
-}
