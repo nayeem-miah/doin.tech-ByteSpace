@@ -3,6 +3,7 @@ import { Avatar } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { TestimonialGlows } from "@/components/ui/SectionGlow";
+import { TintedShape } from "@/components/ui/TintedShape";
 
 /** Full-bleed brand-blue creator call to action. */
 export function CreatorCta() {
@@ -42,33 +43,11 @@ export function CreatorCta() {
 function CtaOrnaments() {
   return (
     <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-      <Tinted src="/assets/hero-float-6.png" tint="lime" className="absolute top-0 right-[280px] h-[189px] w-[189px]" />
-      <Tinted src="/assets/hero-float-4.png" tint="white" className="absolute right-[0px] bottom-0 h-[330px] w-[330px]" />
-      <Tinted src="/assets/hero-float-3.png" tint="white" className="absolute top-0 left-0 h-[387px] w-[387px]" />
-      <Tinted src="/assets/hero-float-1.png" tint="lime" className="absolute right-[20px] bottom-0 h-[189px] w-[189px]" />
+      <TintedShape src="/assets/hero-float-6.png" tint="lime" className="absolute top-0 right-[280px] h-[189px] w-[189px]" />
+      <TintedShape src="/assets/hero-float-4.png" tint="white" className="absolute right-[0px] bottom-0 h-[330px] w-[330px]" />
+      <TintedShape src="/assets/hero-float-3.png" tint="white" className="absolute top-0 left-0 h-[387px] w-[387px]" />
+      <TintedShape src="/assets/hero-float-1.png" tint="lime" className="absolute right-[20px] bottom-0 h-[189px] w-[189px]" />
     </div>
-  );
-}
-
-function Tinted({
-  src,
-  tint,
-  className = "",
-}: {
-  src: string;
-  tint: "lime" | "white";
-  className?: string;
-}) {
-  const mask = `url(${src}) center / contain no-repeat`;
-  return (
-    <span
-      className={`block ${className}`}
-      style={{
-        backgroundColor: tint === "lime" ? "#d4fb20" : "#ffffff",
-        WebkitMask: mask,
-        mask,
-      }}
-    />
   );
 }
 

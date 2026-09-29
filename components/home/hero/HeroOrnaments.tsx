@@ -1,3 +1,5 @@
+import { TintedShape } from "@/components/ui/TintedShape";
+
 /**
  * Hero ornament layer.
  *
@@ -14,31 +16,6 @@
  *   - the small shapes live in a 1440x1024 layer that is scaled down
  *     whole, so their design coordinates only ever need writing once.
  */
-
-type Tint = "lime" | "white";
-
-function Shape({
-  src,
-  tint,
-  className = "",
-}: {
-  src: string;
-  tint: Tint;
-  className?: string;
-}) {
-  const mask = `url(${src}) center / contain no-repeat`;
-  return (
-    <span
-      aria-hidden="true"
-      className={`block ${className}`}
-      style={{
-        backgroundColor: tint === "lime" ? "#d4fb20" : "#ffffff",
-        WebkitMask: mask,
-        mask,
-      }}
-    />
-  );
-}
 
 export function HeroOrnaments() {
   return (
@@ -63,7 +40,7 @@ export function HeroOrnaments() {
           scaled as one layer on small screens. */}
       <div className="absolute top-0 left-1/2 h-[1024px] w-[1440px] origin-top -translate-x-1/2 scale-[0.45] sm:scale-[0.65] md:scale-100">
         {/* Lime squiggle, top left */}
-        <Shape
+        <TintedShape
           src="/assets/hero-float-6.png"
           tint="lime"
           className="absolute top-[268px] left-[-30px] h-[210px] w-[180px] rotate-[-8deg]"
@@ -72,22 +49,22 @@ export function HeroOrnaments() {
         <span className="absolute top-[150px] right-[-60px] h-[300px] w-[210px] rotate-[20deg] rounded-[80px] bg-lime" />
 
         {/* White ornaments, all sitting on the blue field */}
-        <Shape
+        <TintedShape
           src="/assets/hero-float-1.png"
           tint="white"
           className="absolute top-[520px] left-[212px] h-[92px] w-[92px]"
         />
-        <Shape
+        <TintedShape
           src="/assets/hero-float-4.png"
           tint="white"
           className="absolute bottom-[120px] left-[96px] h-[190px] w-[190px]"
         />
-        <Shape
+        <TintedShape
           src="/assets/shape-lime-2.png"
           tint="white"
           className="absolute top-[500px] right-[168px] h-[112px] w-[112px]"
         />
-        <Shape
+        <TintedShape
           src="/assets/hero-float-3.png"
           tint="white"
           className="absolute right-[36px] bottom-[230px] h-[190px] w-[175px] rotate-[6deg]"
