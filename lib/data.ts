@@ -277,3 +277,85 @@ export const reviews: Review[] = [
     body: "As a creator, ByteSpace has been a game-changer for me. The Course Editor is user-friendly, and the community is incredibly supportive.",
   },
 ];
+
+/* ==========================================================================
+   Course detail
+   Content for /courses/[slug]. Transcribed from the "Course Details" frame.
+   ========================================================================== */
+
+export const courseDetail = {
+  title: "Build Digital Asset: A Comprehensive Guide",
+  subtitle: "Unlock the Power of Digital Creation with Expert Guidance",
+  author: "purepearl studio",
+  discount: "20% OFF",
+  /** Pills under the author line, on the blue band. */
+  meta: ["Intermediate", "4.8 (172 reviews)", "199 Students"],
+
+  /** First three lessons previewed in the sidebar. */
+  previewLessons: [
+    { n: "01", title: "Introduction to Digital Assets", duration: "12 mins" },
+    { n: "02", title: "Design Principles for Impacts", duration: "21 mins" },
+    { n: "03", title: "Advanced Techniques in Digital Creation", duration: "16 mins" },
+  ],
+  moreLessons: "99 more videos",
+  lessonCount: "112 Lessons (24 hours)",
+
+  nudge: "Ready to Dive In? Enroll Now and Start Building Your Digital Future!",
+  price: "$25",
+  period: "/lifetime",
+  guarantee: "30-Day Money-Back Guarantee",
+
+  includes: [
+    "Learning Resources",
+    "Quality Lesson Videos",
+    "Certificate of Completion",
+    "Private Consultation",
+  ],
+
+  description:
+    "Embark on an enlightening exploration into the world of digital creation with our comprehensive course. Whether you're a seasoned professional or a curious beginner, this course is designed to cater to all levels of expertise.",
+
+  /** Bold-led points under "What you'll learn". */
+  learn: [
+    {
+      lead: "Build a Brand Identity",
+      rest: "Create logos and define your visual language from scratch.",
+    },
+    {
+      lead: "Master Colour and Type",
+      rest: "Apply proven systems so every piece reads as one brand.",
+    },
+    {
+      lead: "Design for Every Platform",
+      rest: "Adapt a single idea across web, mobile and print.",
+    },
+    {
+      lead: "Package Your Work",
+      rest: "Assemble a portfolio that gets you hired or sold.",
+    },
+  ],
+
+  sneakPeak: [
+    "/assets/thumb-small-1.png",
+    "/assets/thumb-small-2.png",
+    "/assets/thumb-small-3.png",
+    "/assets/thumb-small-4.png",
+  ],
+
+  keyPoints: [
+    "Foundational Concepts",
+    "Design Principles Mastery",
+    "Advanced Techniques in Digital Creation",
+    "Project Showcase and Critique",
+    "Optimizing for Various Platforms",
+    "Digital Asset Management Best Practices",
+    "Monetization Strategies",
+    "Capstone Project: Building Your Portfolio",
+  ],
+
+  creator: {
+    name: "PurePearl Studio",
+    role: "Professional Creator",
+    bio: "At ByteSpace, we believe in empowering individuals and organisations through knowledge.",
+  },
+};

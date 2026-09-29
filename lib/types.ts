@@ -49,3 +49,25 @@ export type Review = {
 };
 
 export type NavLink = { label: string; href: string };
+
+/** Shape of the /courses/[slug] content block. */
+export type CourseDetail = {
+  title: string;
+  subtitle: string;
+  author: string;
+  discount: string;
+  meta: readonly string[];
+  previewLessons: readonly { n: string; title: string; duration: string }[];
+  moreLessons: string;
+  lessonCount: string;
+  nudge: string;
+  price: string;
+  period: string;
+  guarantee: string;
+  includes: readonly string[];
+  description: string;
+  learn: readonly { lead: string; rest: string }[];
+  sneakPeak: readonly string[];
+  keyPoints: readonly string[];
+  creator: { name: string; role: string; bio: string };
+};
