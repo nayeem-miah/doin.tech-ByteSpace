@@ -9,7 +9,7 @@ import { FilterableCourseGrid } from "@/components/ui/FilterPills";
 import { Icon } from "@/components/ui/icons";
 import { GrowthGlows } from "@/components/ui/SectionGlow";
 import {
-  categoryFilters,
+  categoryFilterRows,
   courses,
   creatorBenefits,
   learningPaths,
@@ -55,7 +55,7 @@ export function DiscoverSection() {
           </p>
         </div>
 
-        <FilterableCourseGrid filters={categoryFilters} courses={courses} />
+        <FilterableCourseGrid rows={categoryFilterRows} courses={courses} />
       </div>
     </section>
   );
