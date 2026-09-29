@@ -18,6 +18,8 @@ export type Course = {
   duration: string;
   comments: number;
   category: string;
+  /** Filter tags, drawn from the pill list in the design. */
+  tags: string[];
   /** Used by the hero and learning-path cards that show progress. */
   progress?: number;
 };

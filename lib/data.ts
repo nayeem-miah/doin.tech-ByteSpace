@@ -62,6 +62,7 @@ export const courses: Course[] = [
   {
     ...SHARED_META,
     slug: "learn-figma-from-basic",
+    tags: ["UI/UX Design", "Graphic Design", "Drawing & Painting", "Digital Illustration", "Featured"],
     title: "Learn Figma from Basic",
     author: "purepearl studio",
     rating: 4.5,
@@ -76,6 +77,7 @@ export const courses: Course[] = [
   {
     ...SHARED_META,
     slug: "build-digital-asset",
+    tags: ["Web Development", "Data Science", "Featured", "Crafts"],
     title: "Build Digital Asset",
     author: "purepearl studio",
     rating: 4.5,
@@ -90,6 +92,7 @@ export const courses: Course[] = [
   {
     ...SHARED_META,
     slug: "the-power-of-big-data",
+    tags: ["Data Science", "Freelance & Entrepreneurship", "Featured"],
     title: "the Power of Big Data",
     author: "purepearl studio",
     rating: 4.5,
@@ -104,6 +107,7 @@ export const courses: Course[] = [
   {
     ...SHARED_META,
     slug: "balancing-productivity-and-self-care",
+    tags: ["Productivity", "Social Media", "Featured"],
     title: "Balancing Productivity and Self-Care",
     author: "purepearl studio",
     rating: 4.5,
@@ -118,6 +122,7 @@ export const courses: Course[] = [
   {
     ...SHARED_META,
     slug: "mastering-money-management",
+    tags: ["Freelance & Entrepreneurship", "Productivity", "Featured"],
     title: "Mastering Money Management",
     author: "purepearl studio",
     rating: 4.5,
@@ -132,6 +137,7 @@ export const courses: Course[] = [
   {
     ...SHARED_META,
     slug: "from-idea-to-startup-success",
+    tags: ["Marketing", "Social Media", "Featured", "Creative Marketing"],
     title: "From Idea to Startup Success",
     author: "purepearl studio",
     rating: 4.5,
