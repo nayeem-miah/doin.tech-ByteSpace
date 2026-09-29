@@ -5,48 +5,96 @@ import { Reveal } from "@/components/ui/Reveal";
 import { TestimonialGlows } from "@/components/ui/SectionGlow";
 import { TintedShape } from "@/components/ui/TintedShape";
 
-/** Full-bleed brand-blue creator call to action. */
+/**
+ * Full-bleed brand-blue creator call to action, 1440x488.
+ *
+ * Content is a 964px centred column: a 710px headline, the supporting
+ * copy at its full 964px, then the lime button. The 3D ornaments are
+ * positioned from the design's own coordinates, most of which sit
+ * outside the frame and are clipped by the section.
+ */
 export function CreatorCta() {
   return (
-    <section className="relative overflow-hidden bg-brand text-on-dark">
-      {/* Same 120px grid printed over the blue field as the hero */}
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.07) 1px, transparent 1px)",
-          backgroundSize: "120px 120px",
-        }}
-      />
+    <section className="relative h-[488px] overflow-hidden bg-brand text-on-dark">
+      <CtaGrid />
+      <CtaOrnaments />
 
-      <div className="relative mx-auto max-w-[964px] px-5 py-20 text-center md:px-0 md:py-[85px]">
+      <div className="relative mx-auto max-w-[964px] px-5 pt-[85px] text-center md:px-0">
         <h2 className="t-display-lg mx-auto max-w-[710px] text-on-dark">
           Unlock Your Potential as a Creator with ByteSpace
         </h2>
         <p className="t-body-l mx-auto mt-6 max-w-[964px] text-on-dark-muted">
           Experience the collaboration of numerous creators and an expanding
-          selection of courses. Register now to showcase your expertise and
-          contribute to the growing ByteSpace creator community.
+          selection of courses. Register now and become a part of a community
+          comprising over 10,000 local and international creators. Utilize our
+          Course Editor, and showcase your expertise by publishing your finest
+          course on the ByteSpace Course Library.
         </p>
-        <Button href="/register" variant="lime" size="lg" className="mt-8">
+        <Button href="/register" variant="lime" size="md" className="mt-8">
           Join as Creator
         </Button>
       </div>
-
-      <CtaOrnaments />
     </section>
   );
 }
 
-/** The 3D cone and ring ornaments that clip out of the CTA band. */
+/** The 120px grid printed over the blue field, as in the hero. */
+function CtaGrid() {
+  return (
+    <span
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0"
+      style={{
+        backgroundImage:
+          "linear-gradient(to right, rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.07) 1px, transparent 1px)",
+        backgroundSize: "120px 120px",
+      }}
+    />
+  );
+}
+
+/**
+ * Ornament offsets are the design's, measured against the 1440x488 frame.
+ * Several sit outside it and are clipped, which is how the source does it.
+ */
 function CtaOrnaments() {
   return (
     <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-      <TintedShape src="/assets/hero-float-6.png" tint="lime" className="absolute top-0 right-[280px] h-[189px] w-[189px]" />
-      <TintedShape src="/assets/hero-float-4.png" tint="white" className="absolute right-[0px] bottom-0 h-[330px] w-[330px]" />
-      <TintedShape src="/assets/hero-float-3.png" tint="white" className="absolute top-0 left-0 h-[387px] w-[387px]" />
-      <TintedShape src="/assets/hero-float-1.png" tint="lime" className="absolute right-[20px] bottom-0 h-[189px] w-[189px]" />
+      <TintedShape
+        src="/assets/shape-lime-2.png"
+        tint="lime"
+        className="absolute top-0 left-[1080px] size-[188px]"
+      />
+      <TintedShape
+        src="/assets/hero-float-4.png"
+        tint="lime"
+        className="absolute top-[289px] left-[1110px] size-[330px]"
+      />
+      <TintedShape
+        src="/assets/hero-float-6.png"
+        tint="lime"
+        className="absolute top-[-162px] left-[-118px] size-[385px]"
+      />
+      <TintedShape
+        src="/assets/hero-float-3.png"
+        tint="white"
+        className="absolute top-[5px] left-[178px] size-[175px]"
+      />
+      <TintedShape
+        src="/assets/hero-float-1.png"
+        tint="white"
+        className="absolute top-[225px] left-[-48px] size-[188px]"
+      />
+      <TintedShape
+        src="/assets/hero-float-6.png"
+        tint="lime"
+        className="absolute top-[299px] left-[20px] size-[342px] rotate-[12deg]"
+      />
+      <TintedShape
+        src="/assets/shape-lime-4.png"
+        tint="white"
+        className="absolute top-[6px] left-[1226px] size-[370px]"
+      />
     </div>
   );
 }
