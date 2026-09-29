@@ -1,15 +1,20 @@
-import Image from "next/image";
-import { categoryFilters, courses, creatorBenefits, learningPaths } from "@/lib/data";
-import { CourseCard } from "@/components/ui/CourseCard";
-import { FilterableCourseGrid } from "@/components/ui/FilterPills";
-import { CountUp } from "@/components/ui/CountUp";
-import { Icon } from "@/components/ui/icons";
-import { GrowthGlows } from "@/components/ui/SectionGlow";
 import {
   CreatorRevenueCard,
   HappyStudentsCard,
   LearningProgressCard,
 } from "@/components/cards";
+import { CountUp } from "@/components/ui/CountUp";
+import { CourseCard } from "@/components/ui/CourseCard";
+import { FilterableCourseGrid } from "@/components/ui/FilterPills";
+import { Icon } from "@/components/ui/icons";
+import { GrowthGlows } from "@/components/ui/SectionGlow";
+import {
+  categoryFilters,
+  courses,
+  creatorBenefits,
+  learningPaths,
+} from "@/lib/data";
+import Image from "next/image";
 
 /** Grey partner-logo strip that sits directly under the hero. */
 export function LogoStrip() {
@@ -38,15 +43,15 @@ export function DiscoverSection() {
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-[1200px] px-5 py-20 md:px-0 md:py-24">
-        <div className="max-w-[720px]">
-          <h2 className="t-display-lg text-brand-deep">
+        <div className="mx-auto max-w-[720px] text-center">
+          <h2 className="t-display-lg text-brand-deep text-center">
             Discover Your Passion, Build Your Skills
           </h2>
           <p className="t-body-l mt-5 text-body">
-            At Bytespace Courses, we bring you closer to life-changing knowledge.
-            Explore a variety of courses across different fields, from cooking to
-            IT programming, that will help you enhance your career and personal
-            growth.
+            At Bytespace Courses, we bring you closer to life-changing
+            knowledge. Explore a variety of courses across different fields,
+            from cooking to IT programming, that will help you enhance your
+            career and personal growth.
           </p>
         </div>
 
@@ -66,9 +71,9 @@ export function LearningPathsSection() {
             Explore Diverse Learning Paths at Bytespace
           </h2>
           <p className="t-body-l mt-5 text-body">
-            At ByteSpace, we believe in empowering individuals through knowledge.
-            Our diverse range of course paths ensures that learners can find the
-            perfect fit for their interests and goals.
+            At ByteSpace, we believe in empowering individuals through
+            knowledge. Our diverse range of course paths ensures that learners
+            can find the perfect fit for their interests and goals.
           </p>
         </div>
 
