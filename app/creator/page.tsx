@@ -1,85 +1,118 @@
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/layout/PageHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
-import { CourseCard } from "@/components/ui/CourseCard";
+import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Avatar } from "@/components/ui/Avatar";
-import { Icon } from "@/components/ui/icons";
-import { StarRating } from "@/components/ui/StarRating";
+import { CourseCard } from "@/components/ui/CourseCard";
+import { Icon, type IconName } from "@/components/ui/icons";
 import { courses } from "@/lib/data";
 
 export const metadata: Metadata = { title: "Creator" };
 
-const creatorStats = [
-  { value: "12K", label: "Students" },
-  { value: "70+", label: "Courses" },
-  { value: "4.7", label: "Rating" },
+const FILTERS: { label: string; icon: IconName }[] = [
+  { label: "Filter", icon: "filter" },
+  { label: "Level", icon: "chart-bar" },
+  { label: "Category", icon: "shapes" },
 ];
 
 export default function CreatorPage() {
   return (
     <>
-      <PageHeader title="Inspired Creator" />
+      {/* Blue band: identity, bio, stats, follow */}
+      <section className="relative overflow-hidden bg-brand text-on-dark">
+        <SiteHeader />
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.07) 1px, transparent 1px)",
+            backgroundSize: "120px 120px",
+          }}
+        />
+
+        <div className="relative mx-auto max-w-[1200px] px-5 pt-10 pb-16 md:px-0 md:pt-12">
+          <div className="flex items-start gap-6">
+            <Avatar
+              src="/assets/avatar-11.png"
+              size={80}
+              alt="PurePearl Studio"
+              className="border-4 border-white/20"
+            />
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-3">
+                <h1 className="t-display-md text-on-dark">PurePearl Studio</h1>
+                <span className="t-body-l rounded-full bg-white px-3 py-1 text-ink">
+                  Creator
+                </span>
+              </div>
+              <p className="t-body-l mt-2 text-on-dark">
+                Passionate UI/UX, Web designer
+              </p>
+            </div>
+
+            <button
+              type="button"
+              className="press t-h-s shrink-0 rounded-full bg-lime px-6 py-3 text-ink"
+            >
+              Follow
+            </button>
+          </div>
+
+          <p className="t-body-l mt-6 max-w-[900px] text-on-dark-muted">
+            Welcome to the creative world of PurePearl Studio. Here, you&rsquo;ll
+            discover the passion, expertise, and inspiration that drives
+            everything we make.
+          </p>
+
+          <dl className="mt-6 flex gap-10">
+            <div>
+              <dt className="sr-only">Products</dt>
+              <dd>
+                <span className="t-h-s text-lime">3</span>{" "}
+                <span className="t-h-s text-on-dark">Products</span>
+              </dd>
+            </div>
+            <div>
+              <dt className="sr-only">Followers</dt>
+              <dd>
+                <span className="t-h-s text-lime">12</span>{" "}
+                <span className="t-h-s text-on-dark">Followers</span>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
 
       <main className="bg-white">
-        <div className="mx-auto max-w-[1200px] px-5 py-16 md:px-0 md:py-20">
-          {/* Profile card */}
-          <div className="flex flex-col gap-10 lg:flex-row lg:items-start">
-            <div className="flex flex-col items-center gap-5 lg:w-[320px]">
-              <Avatar
-                src="/assets/avatar-15.png"
-                size={180}
-                alt="PurePearl Studio"
-                className="border-4 border-white shadow-e3"
-              />
-              <div className="text-center">
-                <h1 className="t-display-md text-ink">PurePearl Studio</h1>
-                <p className="t-body-l mt-1 text-body">by purepearl studio</p>
-                <div className="mt-3 flex justify-center">
-                  <StarRating value={4.7} tone="dark" />
-                </div>
-              </div>
-              <a
-                href="#"
-                className="press t-h-s inline-flex items-center gap-2 rounded-full border border-brand px-6 py-2.5 text-brand transition-colors duration-200 hover:bg-brand hover:text-white"
-              >
-                <Icon name="users" size={18} />
-                Follow
-              </a>
-            </div>
+        <div className="mx-auto max-w-[1200px] px-5 py-12 md:px-0 md:py-16">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <ul className="flex flex-wrap gap-3">
+              {FILTERS.map((f) => (
+                <li key={f.label}>
+                  <button
+                    type="button"
+                    className="press t-body-l flex h-12 items-center gap-2 rounded-full bg-white px-5 text-muted transition-colors duration-200 hover:text-ink"
+                  >
+                    <Icon name={f.icon} size={20} className="text-ink" />
+                    {f.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
 
-            <div className="flex-1">
-              <h2 className="t-h-l text-ink">About</h2>
-              <p className="t-body-l mt-4 max-w-[70ch] text-body">
-                At ByteSpace, we believe in empowering individuals and
-                organisations through knowledge. We ignite opportunity by setting
-                the world on fire with inspiration, empowering creators, and
-                building tools that make learning and teaching on the internet
-                more accessible than ever before.
-              </p>
+            <button
+              type="button"
+              className="press t-body-l flex h-12 shrink-0 items-center gap-2 self-start rounded-full px-2 text-muted transition-colors duration-200 hover:text-ink sm:self-auto"
+            >
+              <Icon name="align-left" size={18} className="text-ink" />
+              Most relevant
+            </button>
+          </div>
 
-              <dl className="mt-10 flex gap-14">
-                {creatorStats.map((s) => (
-                  <div key={s.label}>
-                    <dt className="sr-only">{s.label}</dt>
-                    <dd>
-                      <span className="t-display-md block text-brand">
-                        {s.value}
-                      </span>
-                      <span className="t-body-l mt-1 block text-body">
-                        {s.label}
-                      </span>
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-
-              <h2 className="t-h-l mt-14 text-ink">Published Courses</h2>
-              <div className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-                {courses.slice(0, 3).map((course) => (
-                  <CourseCard key={course.slug} course={course} />
-                ))}
-              </div>
-            </div>
+          <div className="mt-12 grid auto-rows-[384px] grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+            {courses.map((course) => (
+              <CourseCard key={course.slug} course={course} priority />
+            ))}
           </div>
         </div>
       </main>
