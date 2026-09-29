@@ -64,19 +64,20 @@ export default function CreatorPage() {
             everything we make.
           </p>
 
-          <dl className="mt-6 flex gap-10">
+          {/* White pills with the count in brand blue, per the design. */}
+          <dl className="mt-6 flex flex-wrap gap-3">
             <div>
               <dt className="sr-only">Products</dt>
-              <dd>
-                <span className="t-h-s text-lime">3</span>{" "}
-                <span className="t-h-s text-on-dark">Products</span>
+              <dd className="t-h-s flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-ink">
+                <span className="text-brand">3</span>
+                Products
               </dd>
             </div>
             <div>
               <dt className="sr-only">Followers</dt>
-              <dd>
-                <span className="t-h-s text-lime">12</span>{" "}
-                <span className="t-h-s text-on-dark">Followers</span>
+              <dd className="t-h-s flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-ink">
+                <span className="text-brand">12</span>
+                Followers
               </dd>
             </div>
           </dl>
