@@ -102,9 +102,10 @@ function CtaOrnaments() {
 /**
  * "Discover What Our Community Is Saying".
  *
- * The header is a two-column band - headline left, body right - with the
- * three cards on a full-width row beneath it, not beside it. Avatars are
- * 80px and the cards sit on the same 41px gutter as the source.
+ * The header is a two-column band, 577px of headline against 580px of
+ * body with a 43px gutter, not a stack. Cards are 374px wide, 24px
+ * radius, white with no border, and hold an 80px avatar, the name in
+ * Poppins 20/600, the role in brand blue, then the quote.
  */
 export function TestimonialsSection() {
   return (
@@ -113,32 +114,38 @@ export function TestimonialsSection() {
 
       <div className="relative mx-auto max-w-[1200px] px-5 py-20 md:px-0 md:py-24">
         <div className="grid gap-8 lg:grid-cols-[577fr_580fr] lg:gap-[43px]">
-          <h2 className="t-display-lg text-ink">
+          <h2 className="t-display-lg self-end text-ink">
             Discover What Our Community Is Saying
           </h2>
           <p className="t-body-l text-body">
             At ByteSpace, our vibrant community of learners and creators is at
-            the heart of what we do. Hear what our users have to say about their
-            experiences and why they choose ByteSpace for their learning journey.
+            the heart of what we do. Hear directly from those who have
+            experienced the transformative journey of learning and creating on
+            our platform. Explore testimonials that reflect the diverse
+            perspectives of enthusiastic learners and accomplished creators.
           </p>
         </div>
 
-        <ul className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((t, i) => (
             <Reveal
               as="li"
               key={t.name}
               delay={i * 70}
-              className="flex flex-col rounded-lg border border-line bg-white p-6"
+              className="flex"
             >
-              <Avatar src={t.avatar} size={80} alt={t.name} />
-              <div className="mt-6">
-                <p className="t-display-xs text-ink">{t.name}</p>
-                <p className="t-body-l text-brand">{t.role}</p>
-              </div>
-              <p className="t-body-l mt-4 text-body">
-                &ldquo;{t.quote}&rdquo;
-              </p>
+              <figure className="flex w-full flex-col rounded-lg bg-white p-6 shadow-e2">
+                <Avatar src={t.avatar} size={80} alt={t.name} />
+                <figcaption className="mt-6">
+                  <p className="t-display-xs text-ink">{t.name}</p>
+                  <p className="mt-1 text-[18px] leading-[1.6] text-brand">
+                    {t.role}
+                  </p>
+                </figcaption>
+                <blockquote className="t-body-m mt-6 text-body">
+                  {t.quote}
+                </blockquote>
+              </figure>
             </Reveal>
           ))}
         </ul>
