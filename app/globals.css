@@ -85,6 +85,19 @@
     background: var(--color-lime);
     color: var(--color-ink);
   }
+
+  /* Keyboard focus only - pointer users do not get a ring on click. */
+  :focus-visible {
+    outline: 2px solid var(--color-lime);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* On light surfaces the lime ring has poor contrast, so swap to brand. */
+  .bg-brand :focus-visible,
+  .bg-brand-deep :focus-visible {
+    outline-color: #fff;
+  }
 }
 
 @layer components {
