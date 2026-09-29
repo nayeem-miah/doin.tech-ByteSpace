@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CourseTabs } from "@/components/course/CourseTabs";
-import { EnrolCard } from "@/components/course/CourseParts";
+import { EnrolCard } from "@/components/course/EnrolCard";
 import { Badge } from "@/components/ui/Badge";
 import { Icon, type IconName } from "@/components/ui/icons";
 import { courses, lessons } from "@/lib/data";
@@ -67,7 +67,7 @@ export default async function LessonsPage({
               </ol>
             </section>
 
-            <EnrolCard course={course} />
+            <EnrolCard />
           </div>
         </div>
       </main>

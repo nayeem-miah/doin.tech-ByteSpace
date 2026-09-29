@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CourseTabs } from "@/components/course/CourseTabs";
-import { EnrolCard } from "@/components/course/CourseParts";
+import { EnrolCard } from "@/components/course/EnrolCard";
 import { Avatar } from "@/components/ui/Avatar";
 import { Icon } from "@/components/ui/icons";
 import { courses, reviews } from "@/lib/data";
@@ -95,7 +95,7 @@ export default async function ReviewsPage({
               </ul>
             </section>
 
-            <EnrolCard course={course} />
+            <EnrolCard />
           </div>
         </div>
       </main>
