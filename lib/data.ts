@@ -16,27 +16,38 @@ export const headerLinks: NavLink[] = [
   { label: "Join Us", href: "/register" },
 ];
 
-/** Category filter pills shown under the "Discover Your Passion" heading. */
-export const categoryFilters = [
-  "Featured",
-  "Music",
-  "Drawing & Painting",
-  "Marketing",
-  "Animation",
-  "Social Media",
-  "UI/UX Design",
-  "Creative Marketing",
-  "Digital Illustration",
-  "Film & Video",
-  "Crafts",
-  "Freelance & Entrepreneurship",
-  "Graphic Design",
-  "Photography",
-  "Productivity",
-  "Web Development",
-  "Data Science",
-  "Cooking",
+/**
+ * Category filter pills under the "Discover Your Passion" heading.
+ *
+ * The design lays these out as three fixed, independently centred rows
+ * (1086px, 952px and 622px wide in a 1440 frame) rather than as one
+ * wrapping list, so the grouping is part of the design and lives here
+ * rather than being left to flex-wrap.
+ */
+export const categoryFilterRows = [
+  [
+    "Featured",
+    "Music",
+    "Drawing & Painting",
+    "Marketing",
+    "Animation",
+    "Social Media",
+    "UI/UX Design",
+    "Creative Marketing",
+  ],
+  [
+    "Digital Illustration",
+    "Film & Video",
+    "Crafts",
+    "Freelance & Entrepreneurship",
+    "Graphic Design",
+    "Photography",
+  ],
+  ["Productivity", "Web Development", "Data Science", "Cooking"],
 ] as const;
+
+/** Flat view of the rows above, for consumers that just need the labels. */
+export const categoryFilters: readonly string[] = categoryFilterRows.flat();
 
 export const featuredCategories = [
   { label: "Design", icon: "shapes" },
