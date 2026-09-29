@@ -1,23 +1,15 @@
-import Link from "next/link";
-import { headerLinks, nav } from "@/lib/data";
+import { MobileNav } from "@/components/layout/MobileNav";
 import { Icon } from "@/components/ui/icons";
 import { Logo } from "@/components/ui/Logo";
-import { MobileNav } from "@/components/layout/MobileNav";
+import { headerLinks, nav } from "@/lib/data";
+import Link from "next/link";
 
-/**
- * Site header. Sits on the brand-blue band in the design: 120px tall,
- * logo left, primary nav centred, account links + cart right.
- * `tone="dark"` is the light-background variant used inside page bodies.
- */
 export function SiteHeader({ tone = "light" }: { tone?: "light" | "dark" }) {
   const onDark = tone === "light";
 
   return (
     <header
-      className={[
-        "w-full",
-        onDark ? "text-on-dark" : "text-ink",
-      ].join(" ")}
+      className={["w-full", onDark ? "text-on-dark" : "text-ink"].join(" ")}
     >
       <div className="mx-auto flex h-[88px] max-w-[1200px] items-center justify-between gap-8 px-5 md:h-[120px] md:px-0">
         <Logo tone={onDark ? "light" : "dark"} />
@@ -65,7 +57,7 @@ export function SiteHeader({ tone = "light" }: { tone?: "light" | "dark" }) {
               onDark ? "hover:text-lime" : "hover:text-brand",
             ].join(" ")}
           >
-            <Icon name="wallet" size={20} />
+            <Icon name="shopping-bag" size={20} />
           </button>
         </div>
 
@@ -75,7 +67,6 @@ export function SiteHeader({ tone = "light" }: { tone?: "light" | "dark" }) {
   );
 }
 
-/** Compact header for the auth pages, which use a 120px white band. */
 export function AuthHeader() {
   return (
     <header className="w-full border-b border-line bg-white">

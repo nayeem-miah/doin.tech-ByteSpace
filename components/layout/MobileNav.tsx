@@ -1,19 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { headerLinks, nav } from "@/lib/data";
 import { Icon } from "@/components/ui/icons";
 import { Logo } from "@/components/ui/Logo";
+import { headerLinks, nav } from "@/lib/data";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
-/**
- * Mobile navigation drawer.
- *
- * Opens from the right on viewports below md. The sheet animates with a
- * 260ms ease-out on transform only, and closes faster (200ms) than it
- * opens - the release should feel quicker than the reveal.
- */
 export function MobileNav({ tone = "light" }: { tone?: "light" | "dark" }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -64,7 +57,11 @@ export function MobileNav({ tone = "light" }: { tone?: "light" | "dark" }) {
           onDark ? "text-on-dark" : "text-ink",
         ].join(" ")}
       >
-        {open ? <Icon name="chevron-left" size={20} /> : <Icon name="filter" size={20} />}
+        {open ? (
+          <Icon name="chevron-left" size={20} />
+        ) : (
+          <Icon name="filter" size={20} />
+        )}
       </button>
 
       {/* Scrim */}
