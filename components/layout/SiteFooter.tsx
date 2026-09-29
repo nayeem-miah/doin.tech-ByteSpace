@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { footerColumns, legalLinks } from "@/lib/data";
 import { Button } from "@/components/ui/Button";
-import { Icon } from "@/components/ui/icons";
 import { Logo } from "@/components/ui/Logo";
 
 /**

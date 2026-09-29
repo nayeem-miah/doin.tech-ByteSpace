@@ -10,6 +10,7 @@ text colour to tone icons, e.g. a lime star on a blue hero).
 Run:  python scripts/gen_icons.py
 """
 
+import json
 import os
 import re
 
@@ -39,7 +40,8 @@ type IconProps = Omit<SVGProps<SVGSVGElement>, "name"> & {
 
 /**
  * Every glyph inherits colour from the surrounding text via currentColor, so
- * `className="text-lime"` tints the icon.
+ * `className="text-lime"` tints the icon. The inner markup is inlined from
+ * the Figma export by scripts/gen_icons.py, never user input.
  */
 export function Icon({ name, size = 20, className, ...rest }: IconProps) {
   const { viewBox, body } = P[name];
@@ -52,10 +54,9 @@ export function Icon({ name, size = 20, className, ...rest }: IconProps) {
       aria-hidden="true"
       focusable="false"
       className={className}
+      dangerouslySetInnerHTML={{ __html: body }}
       {...rest}
-    >
-      {body}
-    </svg>
+    />
   );
 }
 '''
@@ -79,7 +80,10 @@ def main():
         stem = name[:-4]
         with open(os.path.join(SRC, name), encoding="utf-8") as fh:
             view_box, body = clean(fh.read())
-        parts.append('  "%s": { viewBox: "%s", body: <%s /> },' % (stem, view_box, body))
+        # JSX cannot hold raw tags in an object literal, so the inner markup is
+        # kept as a string and injected via dangerouslySetInnerHTML.
+        parts.append('  "%s": {\n    viewBox: "%s",\n    body: %s,\n  },'
+                     % (stem, view_box, json.dumps(body)))
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as fh:
