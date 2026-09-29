@@ -7,7 +7,7 @@ import type { Course, Lesson, NavLink, Review, Testimonial } from "./types";
 
 export const nav: NavLink[] = [
   { label: "Home", href: "/" },
-  { label: "Courses", href: "/search" },
+  { label: "Courses", href: "/courses" },
   { label: "Creators", href: "/creator" },
 ];
 
