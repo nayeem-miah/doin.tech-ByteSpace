@@ -1,26 +1,266 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ==========================================================================
+   ByteSpace design tokens
+   Values are taken verbatim from the Figma file (node tree + published
+   styles), not eyeballed. See `python scripts/figma_extract.py tokens`.
+
+   The Figma design is light-mode only, so there is deliberately no
+   prefers-color-scheme inversion here: this project is a 1:1 replica and
+   a dark variant would break fidelity with the source design.
+   ========================================================================== */
+
+@theme {
+  /* --- Brand ------------------------------------------------------------ */
+  --color-brand: #003be2;          /* "Electric Violet" - primary blue      */
+  --color-brand-deep: #040819;     /* deepest navy                          */
+  --color-purple: #300b6a;
+  --color-lime: #d4fb20;           /* "Electric Lime" - accent              */
+  --color-lime-soft: #f2ff92;
+  --color-lime-pale: #e4ff54;
+  --color-teal: #64e4d0;
+
+  /* --- Ink / surfaces --------------------------------------------------- */
+  --color-ink: #242528;            /* primary text, 349 uses                */
+  --color-body: #4f4f4f;           /* body copy, 256 uses                   */
+  --color-muted: #4b4c53;          /* secondary text, 238 uses              */
+  --color-subtle: #82868e;         /* muted / meta, 73 uses                 */
+  --color-line: #ced0d3;           /* hairlines                             */
+  --color-line-soft: #e5e6e8;
+  --color-surface: #f5f5f6;
+  --color-surface-2: #fafafa;
+  --color-on-dark: #f5f5f6;
+  --color-on-dark-muted: rgb(246 246 246 / 0.6);
+
+  /* --- Radii (Figma uses 8 / 12 / 16 / 24 / 40 / pill) ------------------ */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 40px;
+
+  /* --- Elevation: the file's 8-step shadow ladder ----------------------- */
+  --shadow-e1: 0 1px 3px rgb(0 0 0 / 0.04);
+  --shadow-e2: 0 3px 6px rgb(0 0 0 / 0.06);
+  --shadow-e3: 0 8px 10px rgb(0 0 0 / 0.07);
+  --shadow-e4: 0 15px 16px rgb(0 0 0 / 0.08);
+  --shadow-e5: 0 24px 24px rgb(0 0 0 / 0.09);
+  --shadow-e6: 0 37px 36px rgb(0 0 0 / 0.1);
+  --shadow-e7: 0 53px 56px rgb(0 0 0 / 0.11);
+  --shadow-e8: 0 73px 72px rgb(0 0 0 / 0.13);
+
+  /* --- Motion (see emil-design-eng) ------------------------------------ */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ==========================================================================
+   Type scale
+   Satoshi carries body and UI, Poppins carries display, Clash Display is the
+   wordmark. Sizes / line-heights / tracking are the Figma values.
+   ========================================================================== */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  html,
+  body {
+    /* Decorative ornaments are absolutely positioned past the edges on
+       purpose; the page itself must never scroll sideways. */
+    overflow-x: clip;
+  }
+
+  body {
+    background: #fff;
+    color: var(--color-ink);
+    font-family: var(--font-satoshi), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--color-lime);
+    color: var(--color-ink);
+  }
+
+  /* Keyboard focus only - pointer users do not get a ring on click. */
+  :focus-visible {
+    outline: 2px solid var(--color-lime);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* On light surfaces the lime ring has poor contrast, so swap to brand. */
+  .bg-brand :focus-visible,
+  .bg-brand-deep :focus-visible {
+    outline-color: #fff;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Sizes are the Figma values at 1440, and clamp down to a readable
+     minimum on small screens. Tracking is expressed in em because every
+     display step in the source uses -1% of its own font size
+     (0.72px at 72px, 0.44px at 44px, ...), so one rule covers them all. */
+
+  /* --- Display: Poppins 600 --------------------------------------------- */
+  .t-display-xl {
+    font-family: var(--font-poppins);
+    font-weight: 600;
+    font-size: clamp(30px, 5.2vw, 72px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .t-display-lg {
+    font-family: var(--font-poppins);
+    font-weight: 600;
+    font-size: clamp(26px, 3.3vw, 44px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .t-display-md {
+    font-family: var(--font-poppins);
+    font-weight: 600;
+    font-size: clamp(22px, 2.6vw, 36px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .t-display-sm {
+    font-family: var(--font-poppins);
+    font-weight: 600;
+    font-size: clamp(19px, 1.9vw, 24px);
+    line-height: 1.333;
+    letter-spacing: -0.01em;
+  }
+  .t-display-xs {
+    font-family: var(--font-poppins);
+    font-weight: 600;
+    font-size: clamp(17px, 1.6vw, 20px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  /* --- Headings: Satoshi ------------------------------------------------ */
+  .t-h-l {
+    font-family: var(--font-satoshi);
+    font-weight: 500;
+    font-size: clamp(20px, 1.9vw, 24px);
+    line-height: 1.35;
+  }
+  .t-h-m {
+    font-family: var(--font-satoshi);
+    font-weight: 500;
+    font-size: clamp(18px, 1.7vw, 20px);
+    line-height: 1.2;
+  }
+  .t-h-s {
+    font-family: var(--font-satoshi);
+    font-weight: 500;
+    font-size: clamp(17px, 1.6vw, 18px);
+    line-height: 1.2;
+  }
+
+  /* --- Body: Satoshi ---------------------------------------------------- */
+  .t-body-l {
+    font-family: var(--font-satoshi);
+    font-weight: 400;
+    font-size: clamp(15px, 1.3vw, 16px);
+    line-height: 1.6;
+  }
+  .t-body-m {
+    font-family: var(--font-satoshi);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .t-body-s {
+    font-family: var(--font-satoshi);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  /* --- Labels: Satoshi medium ------------------------------------------- */
+  .t-label {
+    font-family: var(--font-satoshi);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.2;
+  }
+  .t-label-lg {
+    font-family: var(--font-satoshi);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  /* --- Wordmark --------------------------------------------------------- */
+  .t-logo {
+    font-family: var(--font-clash);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.23;
+  }
+}
+
+/* ==========================================================================
+   Motion
+   ========================================================================== */
+
+@layer utilities {
+  /* Press feedback, gated so touch devices do not fire phantom hovers. */
+  @media (hover: hover) and (pointer: fine) {
+    .press {
+      transition: transform 160ms var(--ease-out);
+    }
+    .press:hover {
+      transform: translateY(-1px);
+    }
+    .press:active {
+      transform: scale(0.97);
+    }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 600ms var(--ease-out),
+      transform 600ms var(--ease-out);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Progress fill grows from the left edge; transform only, never width. */
+  .progress-fill {
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 900ms var(--ease-out);
+  }
+  .progress-fill.is-filled {
+    transform: scaleX(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+    .progress-fill {
+      transform: scaleX(1);
+    }
+  }
 }
