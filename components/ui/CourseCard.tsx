@@ -1,6 +1,6 @@
+import type { Course } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
-import type { Course } from "@/lib/types";
 import { Avatar } from "./Avatar";
 import { Icon } from "./icons";
 
@@ -11,13 +11,6 @@ const CARD_AVATARS = [
   "/assets/avatar-04.png",
 ];
 
-/**
- * Course card: 373x384, white, 24px radius, hairline border.
- *
- * The height is fixed rather than content-driven. In the Figma grid every
- * card is exactly 384px, and letting a one-line title sit next to a
- * two-line one would make the row ragged.
- */
 export function CourseCard({
   course,
   priority = false,
@@ -53,11 +46,13 @@ export function CourseCard({
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
               <h3 className="t-display-xs truncate text-ink">{course.title}</h3>
-              <p className="t-body-s mt-1 text-body">by {course.author}</p>
+              <p className="t-body-s mt-1 text-body">
+                by <span className="text-brand">{course.author}</span>
+              </p>
             </div>
             <span className="t-h-s flex shrink-0 items-center gap-0.5 text-body">
               {course.rating.toFixed(1)}
-              <Icon name="star-dark" size={16} className="text-ink" />
+              <Icon name="star-muted" size={16} className="text-line" />
             </span>
           </div>
 
@@ -78,7 +73,10 @@ export function CourseCard({
                   {...{ style: { marginLeft: i === 0 ? 0 : -8 } }}
                 />
               ))}
-              <span className="t-label ml-1 text-body">{course.students}</span>
+              {/* 32px lime circle closing the stack, per the design. */}
+              <span className="t-label ml-1 grid size-8 shrink-0 place-items-center rounded-full bg-lime text-ink">
+                {course.students}
+              </span>
             </span>
           </div>
 

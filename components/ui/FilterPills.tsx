@@ -6,22 +6,28 @@ import { CourseCard } from "./CourseCard";
 import { Reveal } from "./Reveal";
 
 /**
- * Category filter row plus the course grid it filters.
+ * Category filter rows plus the course grid they filter.
  *
- * The row is one client boundary because the selected pill is state. It
- * owns the grid so the two can never drift out of sync, and the visible
- * courses are derived rather than stored.
+ * One client boundary because the selected pill is state. It owns the
+ * grid so the two can never drift out of sync, and the visible courses
+ * are derived rather than stored.
+ *
+ * The design sets the pills in three fixed, independently centred rows
+ * (1086 / 952 / 622px wide in a 1440 frame) rather than one wrapping
+ * list, so the grouping is passed in as `rows`. Each row centres
+ * itself, which is what keeps rows two and three centred instead of
+ * trailing off to the left under the long first row.
  */
 export function FilterableCourseGrid({
-  filters,
+  rows,
   courses,
   moreLabel = "+ More",
 }: {
-  filters: readonly string[];
+  rows: readonly (readonly string[])[];
   courses: Course[];
   moreLabel?: string;
 }) {
-  const [active, setActive] = useState<string>(filters[0] ?? "");
+  const [active, setActive] = useState<string>(rows[0]?.[0] ?? "");
 
   const visible = useMemo(
     () =>
@@ -33,32 +39,44 @@ export function FilterableCourseGrid({
 
   return (
     <>
-      <div className="mt-10 flex flex-wrap gap-4">
-        {filters.map((f) => {
-          const isActive = f === active;
-          return (
-            <button
-              key={f}
-              type="button"
-              onClick={() => setActive(f)}
-              aria-pressed={isActive}
-              className={[
-                "press t-body-l shrink-0 rounded-full px-4 py-3 font-medium",
-                isActive
-                  ? "bg-lime text-ink"
-                  : "bg-surface text-muted hover:text-ink",
-              ].join(" ")}
-            >
-              {f}
-            </button>
-          );
-        })}
-        <a
-          href="#"
-          className="press t-body-l shrink-0 px-4 py-3 font-medium text-brand transition-colors hover:text-brand-deep"
-        >
-          {moreLabel}
-        </a>
+      <div className="mt-10 flex flex-col gap-4">
+        {rows.map((row, rowIndex) => (
+          <ul
+            key={rowIndex}
+            className="flex flex-wrap justify-center gap-4"
+          >
+            {row.map((label) => {
+              const isActive = label === active;
+              return (
+                <li key={label}>
+                  <button
+                    type="button"
+                    onClick={() => setActive(label)}
+                    aria-pressed={isActive}
+                    className={[
+                      "press t-body-l shrink-0 rounded-full px-4 py-3 font-medium",
+                      isActive
+                        ? "bg-lime text-ink"
+                        : "bg-surface text-muted hover:text-ink",
+                    ].join(" ")}
+                  >
+                    {label}
+                  </button>
+                </li>
+              );
+            })}
+            {rowIndex === rows.length - 1 ? (
+              <li>
+                <a
+                  href="#"
+                  className="press t-body-l block shrink-0 px-4 py-3 font-medium text-brand transition-colors hover:text-brand-deep"
+                >
+                  {moreLabel}
+                </a>
+              </li>
+            ) : null}
+          </ul>
+        ))}
       </div>
 
       {visible.length > 0 ? (
@@ -77,7 +95,7 @@ export function FilterableCourseGrid({
           ))}
         </ul>
       ) : (
-        <p className="t-body-l mt-12 text-subtle">
+        <p className="t-body-l mt-12 text-center text-subtle">
           No courses in {active} yet.
         </p>
       )}
