@@ -43,6 +43,13 @@ export const metadata: Metadata = {
   },
   description:
     "ByteSpace supports individuals or entities interested in teaching and learning. Join a community of learners and creators shaping the future of online education.",
+  openGraph: {
+    type: "website",
+    siteName: "ByteSpace",
+    title: "ByteSpace - Unlock Your Potential as a Creator",
+    description:
+      "Get access to hundreds of courses. Learn, teach and grow alongside a community of creators.",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
