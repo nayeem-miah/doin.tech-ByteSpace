@@ -47,21 +47,30 @@ export function ReviewsBody() {
       <section>
         <h2 className="t-display-sm text-ink">{d.listHeading}</h2>
 
+        {/* Same pill language as the course tabs: lime for the active
+            filter, surface grey for the rest, each star rating carrying
+            its own glyph. */}
         <ul className="mt-5 flex flex-wrap gap-3">
-          {d.filters.map((f, i) => (
-            <li key={f}>
-              <span
-                className={[
-                  "t-body-l block rounded-full border px-4 py-2",
-                  i === 0
-                    ? "border-brand bg-brand text-white"
-                    : "border-line bg-white text-body",
-                ].join(" ")}
-              >
-                {f}
-              </span>
-            </li>
-          ))}
+          {d.filters.map((f, i) => {
+            const active = i === 0;
+            return (
+              <li key={f}>
+                <span
+                  className={[
+                    "t-body-l flex h-12 items-center gap-2 rounded-full px-4 font-medium",
+                    active
+                      ? "bg-lime text-ink"
+                      : "bg-surface text-body",
+                  ].join(" ")}
+                >
+                  {active ? null : (
+                    <Icon name="star-lime" size={18} className="text-body" />
+                  )}
+                  {f}
+                </span>
+              </li>
+            );
+          })}
         </ul>
 
         <ul className="mt-8 flex flex-col gap-4">
