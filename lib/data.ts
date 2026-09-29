@@ -58,13 +58,18 @@ export const featuredCategories = [
   { label: "Photography", icon: "camera" },
 ] as const;
 
+/**
+ * The six category tiles. Icon names match the generated
+ * components/ui/CategoryIcons.tsx, which holds the real glyph vectors
+ * lifted from these cards in the Figma frame.
+ */
 export const learningPaths = [
-  { label: "Design", icon: "shapes" },
-  { label: "Development", icon: "code" },
-  { label: "IT & Software", icon: "monitor" },
-  { label: "Business", icon: "briefcase" },
-  { label: "Marketing", icon: "campaign" },
-  { label: "Photography", icon: "camera" },
+  { label: "Design", icon: "design" },
+  { label: "Development", icon: "development" },
+  { label: "IT & Software", icon: "itSoftware" },
+  { label: "Business", icon: "business" },
+  { label: "Marketing", icon: "marketing" },
+  { label: "Photography", icon: "photography" },
 ] as const;
 
 const SHARED_META = { lessons: 17, duration: "2 hours 16 mins", comments: 59 };
