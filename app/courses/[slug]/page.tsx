@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CourseTabs } from "@/components/course/CourseTabs";
-import { CourseHero, CourseIntro, EnrolCard } from "@/components/course/CourseParts";
+import { CourseHero, EnrolCard } from "@/components/course/CourseParts";
 import { courses } from "@/lib/data";
 
 export const metadata: Metadata = { title: "Course" };
@@ -31,7 +31,6 @@ export default async function CourseDetailsPage({
 
           <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_380px] lg:gap-16">
             <div className="flex flex-col gap-10">
-              <CourseIntro course={course} />
               <section>
                 <h2 className="t-h-l text-ink">Description</h2>
                 <p className="t-body-l mt-4 text-body">

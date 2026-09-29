@@ -6,29 +6,38 @@ import { Icon } from "@/components/ui/icons";
 import { StarRating } from "@/components/ui/StarRating";
 import type { Course } from "@/lib/types";
 
-/** Course hero artwork + the meta pill row that sits over it. */
+/**
+ * Course artwork and its meta pill row.
+ *
+ * The thumbnail is shown at its natural 341x195 rather than stretched
+ * across the full 1200px: the exported assets are sized for the card,
+ * and upscaling them to a banner reads as blur.
+ */
 export function CourseHero({ course }: { course: Course }) {
   return (
-    <div className="relative h-[300px] overflow-hidden rounded-lg md:h-[420px]">
-      <Image
-        src="/assets/course-detail-hero.png"
-        alt=""
-        fill
-        priority
-        sizes="(max-width: 768px) 100vw, 1200px"
-        className="object-cover"
-      />
-      <ul className="absolute bottom-5 left-5 flex flex-wrap gap-3">
-        <li>
-          <Badge tone="surface">{course.lessons} Lessons</Badge>
-        </li>
-        <li>
-          <Badge tone="surface">{course.duration}</Badge>
-        </li>
-        <li>
-          <Badge tone="surface">{course.comments} Comments</Badge>
-        </li>
-      </ul>
+    <div className="grid gap-8 md:grid-cols-[minmax(0,420px)_1fr] md:items-center">
+      <div className="relative aspect-[341/195] w-full overflow-hidden rounded-sm">
+        <Image
+          src={course.thumb}
+          alt=""
+          fill
+          priority
+          sizes="(max-width: 768px) 100vw, 420px"
+          className="object-cover"
+        />
+        <ul className="absolute bottom-3 left-3 flex flex-wrap gap-2">
+          <li>
+            <Badge tone="surface">{course.lessons} Lessons</Badge>
+          </li>
+          <li>
+            <Badge tone="surface">{course.duration}</Badge>
+          </li>
+          <li>
+            <Badge tone="surface">{course.comments} Comments</Badge>
+          </li>
+        </ul>
+      </div>
+      <CourseIntro course={course} />
     </div>
   );
 }
