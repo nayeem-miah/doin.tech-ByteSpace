@@ -2,6 +2,7 @@ import Link from "next/link";
 import { headerLinks, nav } from "@/lib/data";
 import { Icon } from "@/components/ui/icons";
 import { Logo } from "@/components/ui/Logo";
+import { MobileNav } from "@/components/layout/MobileNav";
 
 /**
  * Site header. Sits on the brand-blue band in the design: 120px tall,
@@ -41,7 +42,7 @@ export function SiteHeader({ tone = "light" }: { tone?: "light" | "dark" }) {
         </nav>
 
         <div className="flex items-center gap-6">
-          <ul className="flex items-center gap-6">
+          <ul className="hidden items-center gap-6 md:flex">
             {headerLinks.map((item) => (
               <li key={item.href}>
                 <Link
@@ -60,13 +61,15 @@ export function SiteHeader({ tone = "light" }: { tone?: "light" | "dark" }) {
             type="button"
             aria-label="Cart"
             className={[
-              "press grid size-6 place-items-center transition-colors duration-200",
+              "press hidden size-6 place-items-center transition-colors duration-200 md:grid",
               onDark ? "hover:text-lime" : "hover:text-brand",
             ].join(" ")}
           >
             <Icon name="wallet" size={20} />
           </button>
         </div>
+
+        <MobileNav tone={onDark ? "light" : "dark"} />
       </div>
     </header>
   );
