@@ -4,6 +4,8 @@ import { CourseCard } from "@/components/ui/CourseCard";
 import { FilterPill } from "@/components/ui/Badge";
 import { Icon } from "@/components/ui/icons";
 import { courses } from "@/lib/data";
+import { Reveal } from "@/components/ui/Reveal";
+import { CountUp } from "@/components/ui/CountUp";
 
 /** Grey partner-logo strip that sits directly under the hero. */
 export function LogoStrip() {
@@ -58,11 +60,18 @@ export function DiscoverSection() {
         </div>
 
         {/* Course grid */}
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {courses.map((course) => (
-            <CourseCard key={course.slug} course={course} />
+        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {courses.map((course, i) => (
+            <Reveal
+              as="li"
+              key={course.slug}
+              delay={i * 60}
+              className="flex"
+            >
+              <CourseCard course={course} />
+            </Reveal>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
@@ -87,8 +96,8 @@ export function LearningPathsSection() {
         </div>
 
         <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-          {learningPaths.map((path) => (
-            <li key={path.label}>
+          {learningPaths.map((path, i) => (
+            <Reveal as="li" key={path.label} delay={i * 50}>
               <a
                 href="#"
                 className="press flex h-full flex-col items-center gap-3 rounded-md border border-line bg-white px-4 py-7 text-center transition-colors duration-200 hover:border-ink"
@@ -98,7 +107,7 @@ export function LearningPathsSection() {
                 </span>
                 <span className="t-h-m text-ink">{path.label}</span>
               </a>
-            </li>
+            </Reveal>
           ))}
         </ul>
       </div>
@@ -154,7 +163,10 @@ export function GrowthSection({ stats }: { stats: { value: string; label: string
               <div key={s.label}>
                 <dt className="sr-only">{s.label}</dt>
                 <dd>
-                  <span className="t-display-md block text-brand">{s.value}</span>
+                  <CountUp
+                    value={s.value}
+                    className="t-display-md block text-brand"
+                  />
                   <span className="t-body-l mt-1 block text-body">{s.label}</span>
                 </dd>
               </div>
@@ -164,7 +176,7 @@ export function GrowthSection({ stats }: { stats: { value: string; label: string
 
         <div className="relative">
           <Image
-            src="/assets/course-detail-hero.png"
+            src="/assets/hero-person.png"
             alt=""
             width={720}
             height={479}

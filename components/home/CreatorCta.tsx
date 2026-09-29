@@ -3,6 +3,7 @@ import { testimonials, creatorBenefits } from "@/lib/data";
 import { Avatar } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/icons";
+import { Reveal } from "@/components/ui/Reveal";
 
 /** "Create & Manage Courses Easily" - benefits list beside a photo. */
 export function CreatorSection() {
@@ -97,9 +98,11 @@ export function TestimonialsSection() {
           </div>
 
           <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {testimonials.map((t) => (
-              <li
+            {testimonials.map((t, i) => (
+              <Reveal
+                as="li"
                 key={t.name}
+                delay={i * 70}
                 className="flex flex-col gap-4 rounded-lg border border-line bg-white p-6"
               >
                 <Avatar src={t.avatar} size={52} alt={t.name} />
@@ -108,7 +111,7 @@ export function TestimonialsSection() {
                   <p className="t-body-l text-brand">{t.role}</p>
                 </div>
                 <p className="t-body-l text-body">&ldquo;{t.quote}&rdquo;</p>
-              </li>
+              </Reveal>
             ))}
           </ul>
         </div>
