@@ -108,36 +108,6 @@ export function LearningPathsSection() {
     </section>
   );
 }
-
-/** Featured-category strip with a "View More" affordance. */
-export function FeaturedCategoriesBar() {
-  return (
-    <div className="mx-auto flex max-w-[1200px] flex-col gap-6 px-5 pb-4 sm:flex-row sm:items-center sm:justify-between md:px-0">
-      <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
-        <h3 className="t-h-s text-brand">Featured Categories</h3>
-        <ul className="flex flex-wrap gap-x-7 gap-y-2">
-          {learningPaths.map((c) => (
-            <li key={c.label}>
-              <a
-                href="#"
-                className="t-body-l text-body transition-colors hover:text-brand"
-              >
-                {c.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <a
-        href="#"
-        className="t-h-s text-brand transition-colors hover:text-brand-deep"
-      >
-        View More
-      </a>
-    </div>
-  );
-}
-
 /**
  * The two-part feature band from Figma "Frame 15": growth stats, then the
  * creator block, sharing one glow field.
