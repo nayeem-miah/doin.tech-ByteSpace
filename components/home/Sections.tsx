@@ -9,6 +9,7 @@ import { FilterableCourseGrid } from "@/components/ui/FilterPills";
 import { Icon } from "@/components/ui/icons";
 import { GrowthGlows } from "@/components/ui/SectionGlow";
 import { CategoryIcon } from "@/components/ui/CategoryIcons";
+import { TintedShape } from "@/components/ui/TintedShape";
 import {
   categoryFilters,
   courses,
@@ -125,7 +126,10 @@ export function FeatureBand({
     <section className="relative overflow-hidden bg-surface-2">
       <GrowthGlows />
 
-      {/* Row 1: growth */}
+      {/* Row 1: growth. Offsets are the design's, measured from the
+          621px right-hand column: card at 0,0, the photographer at 0,12
+          overlapping it, the progress card at 345,213 and the squiggle
+          at 406,67. */}
       <div className="relative mx-auto grid max-w-[1200px] items-center gap-14 px-5 pt-20 pb-16 md:px-0 md:pt-24 lg:grid-cols-[574fr_621fr] lg:gap-16">
         <div>
           <h2 className="t-display-lg text-ink">
@@ -157,44 +161,67 @@ export function FeatureBand({
           </dl>
         </div>
 
-        <div className="relative flex justify-center lg:justify-end">
-          <div className="relative w-[373px]">
+        <div className="relative h-[552px]">
+          <div className="absolute top-0 left-0 w-[373px]">
             <CourseCard course={courses[0]} />
           </div>
-          <LearningProgressCard className="absolute top-[120px] right-[-110px] hidden xl:block" />
+
+          <Image
+            src="/assets/creator-photo.png"
+            alt=""
+            width={577}
+            height={540}
+            className="pointer-events-none absolute top-[12px] left-0 w-[577px] max-w-none object-contain"
+          />
+
+          <LearningProgressCard className="absolute top-[213px] left-[345px]" />
+
+          <TintedShape
+            src="/assets/hero-float-6.png"
+            tint="lime"
+            className="absolute top-[67px] left-[406px] size-[215px]"
+          />
         </div>
       </div>
 
-      {/* Row 2: creator */}
-      <div className="relative mx-auto grid max-w-[1200px] items-center gap-14 px-5 pb-20 md:px-0 md:pb-28 lg:grid-cols-2">
-        <div className="relative flex justify-center lg:justify-start">
+      {/* Row 2: creator. Offsets from the 541px left-hand column. */}
+      <div className="relative mx-auto grid max-w-[1200px] items-center gap-14 px-5 pb-20 md:px-0 md:pb-28 lg:grid-cols-[541fr_580fr]">
+        <div className="relative h-[596px]">
           <CreatorRevenueCard
-            className="absolute top-0 left-0 z-10 hidden xl:block"
+            className="absolute top-[44px] left-0"
             title="Total Revenue"
             period="July 1-28"
             amount="$120.29"
           />
           <CreatorRevenueCard
-            className="absolute bottom-6 left-12 z-10 hidden xl:block"
+            className="absolute top-[194px] left-0"
             title="Year to Date"
             period="2023"
             amount="$1,200.38"
           />
+
           <Image
             src="/assets/hero-person.png"
             alt=""
             width={435}
             height={596}
-            className="w-full max-w-[360px] object-contain"
+            className="absolute top-0 left-[28px] w-[435px] max-w-none object-contain"
           />
-          <HappyStudentsCard className="absolute right-0 bottom-0 z-10 hidden xl:block" />
+
+          <TintedShape
+            src="/assets/hero-float-6.png"
+            tint="lime"
+            className="absolute top-[114px] left-[305px] size-[215px]"
+          />
+
+          <HappyStudentsCard className="absolute top-[413px] left-[283px]" />
         </div>
 
         <div>
           <h2 className="t-display-lg text-ink">
             Create &amp; Manage Courses Easily.
           </h2>
-          <p className="t-body-l mt-5 text-body">
+          <p className="t-body-l mt-5 max-w-[574px] text-body">
             <strong className="font-medium text-ink">ByteSpace</strong> supports
             individuals or entities in the creation, publication, and
             administration of educational courses.
