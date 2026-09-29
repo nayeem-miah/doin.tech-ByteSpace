@@ -19,15 +19,23 @@ import { Reveal } from "./Reveal";
  * trailing off to the left under the long first row.
  */
 export function FilterableCourseGrid({
-  rows,
+  rows = [],
   courses,
   moreLabel = "+ More",
 }: {
-  rows: readonly (readonly string[])[];
+  rows?: readonly (readonly string[])[];
   courses: Course[];
   moreLabel?: string;
 }) {
-  const [active, setActive] = useState<string>(rows[0]?.[0] ?? "");
+  // Flattened once so the component does not care whether the caller
+  // passed the three designed rows or a single flat list.
+  const allLabels = rows.flat();
+
+  const [selected, setSelected] = useState<string>("");
+
+  // Fall back to the first filter if nothing is selected, or if the
+  // available filters changed and the old pick is no longer offered.
+  const active = allLabels.includes(selected) ? selected : allLabels[0] ?? "";
 
   const visible = useMemo(
     () =>
@@ -41,17 +49,14 @@ export function FilterableCourseGrid({
     <>
       <div className="mt-10 flex flex-col gap-4">
         {rows.map((row, rowIndex) => (
-          <ul
-            key={rowIndex}
-            className="flex flex-wrap justify-center gap-4"
-          >
+          <ul key={rowIndex} className="flex flex-wrap justify-center gap-4">
             {row.map((label) => {
               const isActive = label === active;
               return (
                 <li key={label}>
                   <button
                     type="button"
-                    onClick={() => setActive(label)}
+                    onClick={() => setSelected(label)}
                     aria-pressed={isActive}
                     className={[
                       "press t-body-l shrink-0 rounded-full px-4 py-3 font-medium",
