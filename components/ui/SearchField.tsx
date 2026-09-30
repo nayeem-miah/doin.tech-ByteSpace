@@ -19,7 +19,7 @@ export function SearchField({
 }) {
   return (
     <form
-      className={`flex w-full flex-col gap-3 sm:flex-row ${className}`}
+      className={`flex w-full flex-col gap-2.5 sm:flex-row sm:gap-3 ${className}`}
       action="/courses"
       role="search"
     >
@@ -38,7 +38,7 @@ export function SearchField({
           type="search"
           defaultValue={defaultValue}
           placeholder="Course, topic, creator"
-          className="t-body-l placeholder:text-subtle h-[52px] w-full rounded-full bg-white pr-4 pl-11 text-ink transition-[box-shadow] duration-200 focus:ring-2 focus:ring-lime focus:outline-none"
+          className="t-body-l placeholder:text-subtle h-[46px] w-full rounded-full bg-white pr-4 pl-10 text-ink transition-[box-shadow] duration-200 focus:ring-2 focus:ring-lime focus:outline-none sm:h-[52px] sm:pl-11"
         />
       </div>
       <Button type="submit" variant="lime" size="lg">
