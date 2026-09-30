@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Course } from "@/lib/types";
 import { CourseCard } from "./CourseCard";
 import { Reveal } from "./Reveal";
@@ -32,10 +32,50 @@ export function FilterableCourseGrid({
   const allLabels = rows.flat();
 
   const [selected, setSelected] = useState<string>("");
+  const stripRef = useRef<HTMLUListElement>(null);
 
   // Fall back to the first filter if nothing is selected, or if the
   // available filters changed and the old pick is no longer offered.
   const active = allLabels.includes(selected) ? selected : allLabels[0] ?? "";
+
+  // Which edge has content continuing past it. A passive listener plus rAF
+  // means one dataset write per frame at most, and no React state, so the
+  // strip still never re-renders on scroll.
+  const syncEdge = useCallback(() => {
+    const el = stripRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    if (max <= 1) {
+      el.dataset.edge = "none";
+    } else if (el.scrollLeft <= 1) {
+      el.dataset.edge = "end";
+    } else if (el.scrollLeft >= max - 1) {
+      el.dataset.edge = "start";
+    } else {
+      el.dataset.edge = "middle";
+    }
+  }, []);
+
+  useEffect(() => {
+    const el = stripRef.current;
+    if (!el) return;
+    syncEdge();
+    let frame = 0;
+    const onScroll = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        syncEdge();
+      });
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, [syncEdge]);
 
   const visible = useMemo(
     () =>
@@ -51,6 +91,8 @@ export function FilterableCourseGrid({
         {rows.map((row, rowIndex) => (
           <ul
             key={rowIndex}
+            ref={rowIndex === 0 ? stripRef : undefined}
+            data-edge="none"
             className={[
               // Mobile: one swipeable strip with the scrollbar hidden. It
               // stays inside the page gutter rather than bleeding, so the

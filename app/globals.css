@@ -326,11 +326,21 @@
     display: none;
   }
 
-  /* Fades the trailing edge of a swipe strip so a clipped item reads as
-     scrollable rather than broken. Mobile only; the wrap layout from sm
-     up never clips. */
+  /* Fades whichever edge of a swipe strip has content continuing past
+     it, so a clipped item reads as scrollable rather than broken. The
+     strip sets data-edge from its scroll position; the trailing edge
+     always fades, the leading edge only once there is something behind
+     it. Mobile only - the wrap layout from sm up never clips. */
   @media (max-width: 639px) {
-    .scroll-fade {
+    .scroll-fade[data-edge="start"] {
+      -webkit-mask-image: linear-gradient(
+        to right,
+        #000 36px,
+        transparent 0
+      );
+      mask-image: linear-gradient(to right, #000 36px, transparent 0);
+    }
+    .scroll-fade[data-edge="end"] {
       -webkit-mask-image: linear-gradient(
         to right,
         #000 0,
@@ -340,6 +350,22 @@
       mask-image: linear-gradient(
         to right,
         #000 0,
+        #000 calc(100% - 36px),
+        transparent 100%
+      );
+    }
+    .scroll-fade[data-edge="middle"] {
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0,
+        #000 36px,
+        #000 calc(100% - 36px),
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        to right,
+        transparent 0,
+        #000 36px,
         #000 calc(100% - 36px),
         transparent 100%
       );
