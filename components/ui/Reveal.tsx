@@ -7,6 +7,13 @@ type Origin = "up" | "left" | "scale" | "fade";
 /**
  * Scroll reveal driven by IntersectionObserver.
  *
+ * The observer runs at threshold 0 with a bottom root margin rather than a
+ * ratio. A ratio is the wrong knob: the course body is over 1500px tall, so
+ * threshold 0.12 needed 180px of it on screen before firing, and scrolling
+ * to the section left the whole page blank until the reader had dragged
+ * most of the way past. threshold 0 fires as soon as the top edge
+ * crosses into the viewport, which is what a reveal should mean.
+ *
  * No window scroll listener anywhere: those run on every frame and
  * collapse on mobile. The observer fires once, reveals, and disconnects.
  *
@@ -59,7 +66,7 @@ export function Reveal({
         show();
         io.disconnect();
       },
-      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
+      { threshold: 0, rootMargin: "0px 0px -12% 0px" },
     );
     io.observe(node);
 
@@ -133,7 +140,7 @@ export function Stagger({
         show();
         io.disconnect();
       },
-      { threshold: 0.05, rootMargin: "0px 0px -80px 0px" },
+      { threshold: 0, rootMargin: "0px 0px -12% 0px" },
     );
     io.observe(node);
 
