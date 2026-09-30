@@ -27,18 +27,18 @@ export function Hero() {
       <HeroOrnaments />
 
       <div className="relative mx-auto flex max-w-[1200px] flex-col items-center px-5 pt-6 pb-0 text-center md:px-0 md:pt-10">
-        <h1 className="t-display-xl max-w-[980px] text-on-dark">
+        <h1 className="enter enter-1 t-display-xl max-w-[980px] text-on-dark">
           Get Access to Hundreds Courses Available
         </h1>
 
-        <p className="t-body-l mt-7 max-w-[820px] text-on-dark-muted">
+        <p className="enter enter-2 t-body-l mt-7 max-w-[820px] text-on-dark-muted">
           Unlock your creativity, gain valuable knowledge, and grow your
           business with our wide range of courses.
         </p>
 
-        <SearchField id="hero-search" className="mt-8 max-w-[581px]" />
+        <SearchField id="hero-search" className="enter enter-3 mt-8 max-w-[581px]" />
 
-        <figure className="relative mt-6 h-[560px] w-full md:mt-10 md:h-[600px]">
+        <figure className="enter enter-4 relative mt-6 h-[560px] w-full md:mt-10 md:h-[600px]">
           <Image
             src="/assets/creator-photo.png"
             alt=""
