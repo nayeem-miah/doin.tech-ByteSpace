@@ -30,7 +30,7 @@ export function CourseTabs({ slug }: { slug: string }) {
                 href={href}
                 aria-current={active ? "page" : undefined}
                 className={[
-                  "press t-body-l inline-flex items-center gap-2 rounded-full px-4 py-3 font-medium",
+                  "tab-pill t-body-l inline-flex items-center gap-2 rounded-full px-4 py-3 font-medium",
                   active
                     ? "bg-lime text-ink"
                     : "bg-surface text-muted hover:text-ink",
