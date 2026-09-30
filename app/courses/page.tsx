@@ -5,6 +5,7 @@ import { CourseCard } from "@/components/ui/CourseCard";
 import { Icon, type IconName } from "@/components/ui/icons";
 import { Pagination } from "@/components/ui/Pagination";
 import { SearchField } from "@/components/ui/SearchField";
+import { Stagger } from "@/components/ui/Reveal";
 import { categoryFilters, courses } from "@/lib/data";
 
 export const metadata: Metadata = { title: "Courses" };
@@ -84,7 +85,11 @@ export default function CoursesPage() {
             ))}
           </ul>
 
-          <div className="mt-12 grid auto-rows-[384px] grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger
+            as="div"
+            step={60}
+            className="mt-12 grid auto-rows-[384px] grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {RESULTS.map((course, i) => (
               <CourseCard
                 key={`${course.slug}-${i}`}
@@ -92,7 +97,7 @@ export default function CoursesPage() {
                 priority={i < 3}
               />
             ))}
-          </div>
+          </Stagger>
 
           <div className="mt-16 flex justify-center">
             <Pagination />

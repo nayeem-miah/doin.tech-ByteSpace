@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Avatar } from "@/components/ui/Avatar";
 import { CourseCard } from "@/components/ui/CourseCard";
 import { Icon, type IconName } from "@/components/ui/icons";
+import { Stagger } from "@/components/ui/Reveal";
 import { courses } from "@/lib/data";
 
 export const metadata: Metadata = { title: "Creator" };
@@ -110,11 +111,15 @@ export default function CreatorPage() {
             </button>
           </div>
 
-          <div className="mt-12 grid auto-rows-[384px] grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger
+            as="div"
+            step={60}
+            className="mt-12 grid auto-rows-[384px] grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {courses.map((course) => (
               <CourseCard key={course.slug} course={course} priority />
             ))}
-          </div>
+          </Stagger>
         </div>
       </main>
 
