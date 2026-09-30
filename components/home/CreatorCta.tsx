@@ -54,47 +54,33 @@ function CtaGrid() {
 }
 
 /**
- * Ornament offsets are the design's, measured against the 1440x488 frame.
- * Several sit outside it and are clipped, which is how the source does it.
+ * Ornament placements.
+ *
+ * The design positions seven shapes against a 1440x488 frame, four of
+ * them at or past the frame edge. On a 375px screen the two right-hand
+ * ones fall off the viewport entirely and the rest are large enough to
+ * swallow the copy, so each shape carries a mobile placement as well as
+ * the frame's own from md up.
  */
+const ORNAMENTS = [
+  { src: "/assets/shape-lime-2.png", tint: "lime",  m: "left-[268px] top-[24px] size-[88px]",  d: "md:left-[1080px] md:top-0 md:size-[188px]" },
+  { src: "/assets/hero-float-4.png", tint: "lime",  m: "left-[244px] top-[330px] size-[120px]", d: "md:left-[1110px] md:top-[289px] md:size-[330px]" },
+  { src: "/assets/hero-float-6.png", tint: "lime",  m: "left-[-56px] top-[250px] size-[140px]", d: "md:left-[-118px] md:top-[-162px] md:size-[385px]" },
+  { src: "/assets/hero-float-3.png", tint: "white", m: "left-[36px] top-[36px] size-[76px]",    d: "md:left-[178px] md:top-[5px] md:size-[175px]" },
+  { src: "/assets/hero-float-1.png", tint: "white", m: "left-[-38px] top-[128px] size-[86px]",   d: "md:left-[-48px] md:top-[225px] md:size-[188px]" },
+  { src: "/assets/hero-float-6.png", tint: "lime",  m: "left-[176px] top-[186px] size-[116px]", d: "md:left-[20px] md:top-[299px] md:size-[342px]" },
+  { src: "/assets/shape-lime-4.png", tint: "white", m: "left-[290px] top-[130px] size-[112px]", d: "md:left-[1226px] md:top-[6px] md:size-[370px]" },
+] as const;
+
 function CtaOrnaments() {
+  // The band is a centred, full-width text block, so there is no edge
+  // left to put a shape in without it landing on the copy. They are
+  // frame decoration; below md they are dropped rather than crowded in.
   return (
-    <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-      <TintedShape
-        src="/assets/shape-lime-2.png"
-        tint="lime"
-        className="absolute top-0 left-[1080px] size-[188px]"
-      />
-      <TintedShape
-        src="/assets/hero-float-4.png"
-        tint="lime"
-        className="absolute top-[289px] left-[1110px] size-[330px]"
-      />
-      <TintedShape
-        src="/assets/hero-float-6.png"
-        tint="lime"
-        className="absolute top-[-162px] left-[-118px] size-[385px]"
-      />
-      <TintedShape
-        src="/assets/hero-float-3.png"
-        tint="white"
-        className="absolute top-[5px] left-[178px] size-[175px]"
-      />
-      <TintedShape
-        src="/assets/hero-float-1.png"
-        tint="white"
-        className="absolute top-[225px] left-[-48px] size-[188px]"
-      />
-      <TintedShape
-        src="/assets/hero-float-6.png"
-        tint="lime"
-        className="absolute top-[299px] left-[20px] size-[342px] rotate-[12deg]"
-      />
-      <TintedShape
-        src="/assets/shape-lime-4.png"
-        tint="white"
-        className="absolute top-[6px] left-[1226px] size-[370px]"
-      />
+    <div className="pointer-events-none absolute inset-0 hidden md:block" aria-hidden="true">
+      {ORNAMENTS.map((o, i) => (
+        <TintedShape key={i} src={o.src} tint={o.tint} className={`absolute ${o.m} ${o.d}`} />
+      ))}
     </div>
   );
 }
