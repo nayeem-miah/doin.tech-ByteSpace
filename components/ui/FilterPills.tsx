@@ -52,10 +52,12 @@ export function FilterableCourseGrid({
           <ul
             key={rowIndex}
             className={[
-              // Mobile: one swipeable strip, edge to edge, no scrollbar.
-              "no-scrollbar -mx-5 snap-x snap-mandatory overflow-x-auto px-5",
+              // Mobile: one swipeable strip with the scrollbar hidden. It
+              // stays inside the page gutter rather than bleeding, so the
+              // first pill always sits on the content edge.
+              "no-scrollbar snap-x snap-mandatory overflow-x-auto",
               // sm and up: the designed wrap, centred.
-              "sm:mx-0 sm:snap-none sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0",
+              "sm:snap-none sm:flex-wrap sm:justify-center sm:overflow-visible",
               "flex gap-4",
             ].join(" ")}
           >

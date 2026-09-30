@@ -29,7 +29,7 @@ export function SiteFooter() {
                 type="email"
                 name="email"
                 placeholder="Enter your email"
-                className="t-body-l text-ink placeholder:text-subtle h-[52px] flex-1 rounded-full border border-line bg-white px-6 transition-colors duration-200 focus:border-ink focus:outline-none"
+                className="t-body-l text-ink placeholder:text-subtle h-[52px] w-full rounded-full border border-line bg-white px-6 transition-colors duration-200 focus:border-ink focus:outline-none sm:flex-1"
               />
               <Button type="submit" variant="lime" size="lg">
                 Search

@@ -34,7 +34,7 @@ export function HeroOrnaments() {
       />
 
       {/* The lime disc the person stands in front of */}
-      <span className="absolute bottom-[-190px] left-1/2 size-[560px] -translate-x-1/2 rounded-full bg-lime sm:size-[720px] md:bottom-[-300px] md:size-[900px]" />
+      <span className="absolute bottom-[-80px] left-1/2 size-[440px] -translate-x-1/2 rounded-full bg-lime sm:bottom-[-140px] sm:size-[620px] md:bottom-[-300px] md:size-[900px]" />
 
       {/* Everything below is authored in 1440x1024 design coordinates and
           scaled as one layer on small screens. */}
