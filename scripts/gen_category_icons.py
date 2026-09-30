@@ -24,7 +24,6 @@ OUT = os.path.join(ROOT, "components", "ui", "CategoryIcons.tsx")
 CACHE = os.path.join(ROOT, ".figma", "cat_nodes.json")
 
 FILE_KEY = os.environ.get("FIGMA_FILE_KEY", "OfiTDVmxnfjhcKcdLVtk0A")
-TOKEN = os.environ["FIGMA_TOKEN"]
 
 # node id -> exported name
 ICONS = [
@@ -89,11 +88,12 @@ export function CategoryIcon({ name, size = 36, className, ...rest }: IconProps)
 
 
 def fetch():
+    token = os.environ["FIGMA_TOKEN"]
     url = (
         "https://api.figma.com/v1/files/%s/nodes?ids=%s&geometry=paths&depth=4"
         % (FILE_KEY, ",".join(i for i, _ in ICONS))
     )
-    req = urllib.request.Request(url, headers={"X-Figma-Token": TOKEN})
+    req = urllib.request.Request(url, headers={"X-Figma-Token": token})
     with urllib.request.urlopen(req) as r:
         data = json.load(r)
     with open(CACHE, "w", encoding="utf-8") as fh:
@@ -101,24 +101,71 @@ def fetch():
     return data
 
 
-def geometry_of(node):
-    """Flatten a node's vector geometry into SVG path elements."""
+def matrix_of(node):
+    """A node's relativeTransform as an SVG transform string.
+
+    Figma path data is relative to the node's own origin, so without this
+    the geometry lands at (0,0) of the parent frame instead of where the
+    node sits inside it. The six category glyphs are all centred in their
+    36x36 frames by exactly this offset - design sits at (4.5, 4.5),
+    itSoftware at (0, 6) - so dropping it throws every glyph up and to
+    the left of centre.
+
+    Figma's relativeTransform is [[a, c, e], [b, d, f]] and SVG's matrix()
+    takes (a, b, c, d, e, f) over the same column-vector convention, so
+    the six values transpose rather than reorder.
+    """
+    t = node.get("relativeTransform")
+    if not t:
+        return None
+    (a, c, e), (b, d, f) = t[0], t[1]
+    values = (a, b, c, d, e, f)
+    if values == (1, 0, 0, 1, 0, 0):
+        return None  # identity: no wrapper needed
+    return "matrix(%s)" % " ".join("%g" % v for v in values)
+
+
+def geometry_of(node, seen=None):
+    """Flatten a node's vector geometry into SVG path elements.
+
+    Each vector is wrapped in a <g> carrying its own transform so nested
+    geometry keeps its position within the parent frame.
+    """
+    if seen is None:
+        seen = set()
     parts = []
     for child in node.get("children", []) or []:
-        paths = child.get("fillGeometry") or child.get("pathGeometry") or []
-        for p in paths:
+        inner = []
+        for p in child.get("fillGeometry") or child.get("pathGeometry") or []:
             if p.get("path"):
-                parts.append('<path d="%s"/>' % p["path"])
+                inner.append('<path d="%s"/>' % p["path"])
         if child.get("strokeGeometry") and child.get("strokeWeight"):
             w = child["strokeWeight"]
             for p in child["strokeGeometry"]:
                 if p.get("path"):
-                    parts.append(
+                    inner.append(
                         '<path d="%s" fill="none" stroke="currentColor" '
                         'stroke-width="%s" stroke-linecap="round" '
                         'stroke-linejoin="round"/>' % (p["path"], w)
                     )
-        parts.extend(geometry_of(child))
+        inner.extend(geometry_of(child, seen))
+        if not inner:
+            continue
+        # Figma's boolean ops can leave the same outline on two sibling
+        # vectors (design's frame holds the wrench head twice). Painting an
+        # identical fill twice is invisible but bloats the markup.
+        unique = []
+        for el in inner:
+            if el in seen:
+                continue
+            seen.add(el)
+            unique.append(el)
+        if not unique:
+            continue
+        transform = matrix_of(child)
+        if transform:
+            unique = ['<g transform="%s">%s</g>' % (transform, "".join(unique))]
+        parts.extend(unique)
     return parts
 
 
