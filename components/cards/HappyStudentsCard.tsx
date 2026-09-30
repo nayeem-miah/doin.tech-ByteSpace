@@ -32,7 +32,7 @@ export function HappyStudentsCard({
   className?: string;
 }) {
   return (
-    <div className={`w-[258px] rounded-lg bg-white p-4 shadow-e4 ${className}`}>
+    <div className={`w-full rounded-lg bg-white p-4 shadow-e4 md:w-[258px] ${className}`}>
       <p className="t-h-s text-ink">{label}</p>
       <p className="t-body-s mt-1 flex items-center gap-1 text-subtle">
         {rating.toFixed(1)} ({reviewCount})

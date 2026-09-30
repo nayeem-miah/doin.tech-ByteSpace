@@ -183,7 +183,7 @@ export function FeatureBand({
             className="w-full max-w-[373px] object-contain lg:pointer-events-none lg:absolute lg:top-[12px] lg:left-0 lg:w-[577px] lg:max-w-none"
           />
 
-          <div className="w-full max-w-[320px] lg:contents">
+          <div className="w-full max-w-[373px] lg:contents">
             <LearningProgressCard className="lg:absolute lg:top-[213px] lg:left-[345px]" />
           </div>
 
@@ -198,7 +198,7 @@ export function FeatureBand({
       {/* Row 2: creator. Offsets from the 541px left-hand column. */}
       <div className="relative mx-auto grid max-w-[1200px] items-center gap-14 px-5 pb-20 md:px-0 md:pb-28 lg:grid-cols-[541fr_580fr]">
         <div className="relative mt-10 flex flex-col items-center gap-6 lg:mt-0 lg:block lg:h-[596px]">
-          <div className="flex w-full max-w-[320px] flex-col gap-4 lg:contents">
+          <div className="flex w-full max-w-[373px] flex-col gap-4 lg:contents">
             <CreatorRevenueCard
               className="lg:absolute lg:top-[44px] lg:left-0"
               title="Total Revenue"
@@ -227,7 +227,7 @@ export function FeatureBand({
             className="hidden lg:absolute lg:top-[114px] lg:left-[305px] lg:block lg:size-[215px]"
           />
 
-          <div className="w-full max-w-[280px] lg:contents">
+          <div className="w-full max-w-[373px] lg:contents">
             <HappyStudentsCard className="lg:absolute lg:top-[413px] lg:left-[283px]" />
           </div>
         </div>

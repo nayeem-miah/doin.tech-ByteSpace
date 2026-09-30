@@ -15,7 +15,7 @@ export function LearningProgressCard({
   className?: string;
 }) {
   return (
-    <div className={`w-[232px] rounded-lg bg-white p-5 shadow-e4 ${className}`}>
+    <div className={`w-full rounded-lg bg-white p-5 shadow-e4 md:w-[232px] ${className}`}>
       <p className="t-body-s text-ink">{label}</p>
       <p className="t-display-md mt-3 text-ink">{value}%</p>
       <ProgressBar value={value} className="mt-3" />

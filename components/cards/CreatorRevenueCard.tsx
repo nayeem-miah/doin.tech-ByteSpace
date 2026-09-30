@@ -14,7 +14,7 @@ export function CreatorRevenueCard({
   className?: string;
 }) {
   return (
-    <div className={`w-[175px] rounded-md bg-brand p-4 text-on-dark ${className}`}>
+    <div className={`w-full rounded-md bg-brand p-4 text-on-dark md:w-[175px] ${className}`}>
       <p className="t-label text-on-dark-muted">{title}</p>
       <p className="t-body-s text-on-dark-muted">{period}</p>
       <p className="t-display-sm mt-2 text-on-dark">{amount}</p>
