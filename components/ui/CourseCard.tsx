@@ -34,7 +34,10 @@ export function CourseCard({
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 373px"
             className="card-zoom object-cover"
           />
-          <ul className="absolute bottom-3 left-3 flex gap-3">
+          {/* Three pills do not fit across a 320px card, and wrapping them
+              to two lines spills them out of the thumbnail. They tighten on
+              small screens and take the designed size from sm up. */}
+          <ul className="absolute bottom-2 left-2 flex gap-1.5 sm:bottom-3 sm:left-3 sm:gap-3">
             <MetaPill>{course.lessons} Lessons</MetaPill>
             <MetaPill>{course.duration}</MetaPill>
             <MetaPill>{course.comments} Comments</MetaPill>
@@ -92,7 +95,7 @@ export function CourseCard({
 
 function MetaPill({ children }: { children: React.ReactNode }) {
   return (
-    <li className="t-label rounded-full bg-white/60 px-3 py-1.5 text-body backdrop-blur-[2px]">
+    <li className="t-label shrink-0 whitespace-nowrap rounded-full bg-white/70 px-2 py-1 text-[10px] leading-tight text-body backdrop-blur-[2px] sm:px-3 sm:py-1.5 sm:text-[12px] sm:leading-normal">
       {children}
     </li>
   );

@@ -46,12 +46,14 @@ export function SiteFooter() {
             {footerColumns.map((col) => (
               <div key={col.heading}>
                 <h3 className="t-body-l mb-6 font-medium">{col.heading}</h3>
-                <ul className="flex flex-col gap-4">
+                {/* py-2 on touch lifts the hit area to ~40px; the tighter
+                    gap keeps the visual rhythm the design specifies. */}
+                <ul className="flex flex-col gap-2 md:gap-4">
                   {col.links.map((label) => (
                     <li key={label}>
                       <Link
                         href="#"
-                        className="t-body-m text-body transition-colors duration-200 hover:text-brand"
+                        className="t-body-m block py-2 text-body transition-colors duration-200 hover:text-brand md:py-0"
                       >
                         {label}
                       </Link>
@@ -69,12 +71,12 @@ export function SiteFooter() {
             <p className="t-body-s text-ink">
               @ 2023 ByteSpace. All rights reserved.
             </p>
-            <ul className="flex flex-wrap items-center gap-6">
+            <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
               {legalLinks.map((label) => (
                 <li key={label}>
                   <Link
                     href="#"
-                    className="t-body-s text-body transition-colors duration-200 hover:text-brand"
+                    className="t-body-s block py-2 text-body transition-colors duration-200 hover:text-brand sm:py-0"
                   >
                     {label}
                   </Link>

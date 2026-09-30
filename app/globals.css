@@ -316,6 +316,16 @@
   /* --- Nav underline ----------------------------------------------------
      A transition rather than a keyframe so switching tabs mid-animation
      retargets smoothly instead of restarting. */
+  /* A swipe strip on small screens: the row scrolls, the scrollbar does
+     not, because it would eat 15px of a 390px viewport. */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   .tab-pill {
     transition:
       background-color 200ms var(--ease-out),

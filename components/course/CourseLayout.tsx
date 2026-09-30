@@ -26,7 +26,7 @@ export function CourseLayout({
       <div className="relative">
         <CourseHero />
 
-        <div className="relative mx-auto -mt-[420px] max-w-[1200px] px-5 md:px-0">
+        <div className="relative mx-auto max-w-[1200px] px-5 md:px-0 lg:-mt-[420px]">
           <div className="grid gap-8 lg:grid-cols-[1fr_412px] lg:gap-10">
             <div />
             <EnrolCard />

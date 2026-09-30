@@ -49,11 +49,20 @@ export function FilterableCourseGrid({
     <>
       <div className="mt-10 flex flex-col gap-4">
         {rows.map((row, rowIndex) => (
-          <ul key={rowIndex} className="flex flex-wrap justify-center gap-4">
+          <ul
+            key={rowIndex}
+            className={[
+              // Mobile: one swipeable strip, edge to edge, no scrollbar.
+              "no-scrollbar -mx-5 snap-x snap-mandatory overflow-x-auto px-5",
+              // sm and up: the designed wrap, centred.
+              "sm:mx-0 sm:snap-none sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0",
+              "flex gap-4",
+            ].join(" ")}
+          >
             {row.map((label) => {
               const isActive = label === active;
               return (
-                <li key={label}>
+                <li key={label} className="snap-start shrink-0">
                   <button
                     type="button"
                     onClick={() => setSelected(label)}
@@ -71,7 +80,7 @@ export function FilterableCourseGrid({
               );
             })}
             {rowIndex === rows.length - 1 ? (
-              <li>
+              <li className="snap-start shrink-0">
                 <a
                   href="#"
                   className="press t-body-l block shrink-0 px-4 py-3 font-medium text-brand transition-colors hover:text-brand-deep"

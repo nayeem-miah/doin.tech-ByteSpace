@@ -28,7 +28,7 @@ export function AuthShell({
   children: ReactNode;
 }) {
   return (
-    <section className="relative min-h-[1024px] overflow-hidden bg-brand text-on-dark">
+    <section className="relative overflow-hidden bg-brand text-on-dark lg:min-h-[1024px]">
       <span
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
