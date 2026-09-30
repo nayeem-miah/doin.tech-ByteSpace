@@ -24,25 +24,25 @@ const SHAPES: Placement[] = [
   {
     src: "/assets/hero-float-6.png",
     tint: "lime",
-    m: "left-[-70px] top-[150px] size-[150px]",
+    m: "left-[-58px] top-[104px] size-[124px]",
     d: "md:left-[-118px] md:top-[702px] md:size-[385px]",
   },
   {
     src: "/assets/hero-float-4.png",
     tint: "lime",
-    m: "left-[210px] top-[200px] size-[110px]",
+    m: "left-[252px] top-[112px] size-[98px]",
     d: "md:left-[151px] md:top-[320px] md:size-[146px]",
   },
   {
     src: "/assets/hero-float-3.png",
     tint: "white",
-    m: "left-[-46px] top-[330px] size-[92px]",
+    m: "left-[-40px] top-[268px] size-[88px]",
     d: "md:left-[350px] md:top-[626px] md:size-[175px]",
   },
   {
     src: "/assets/hero-float-1.png",
     tint: "white",
-    m: "left-[248px] top-[400px] size-[96px]",
+    m: "left-[256px] top-[300px] size-[92px]",
     d: "md:left-[1154px] md:top-[169px] md:size-[222px]",
   },
   {

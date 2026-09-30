@@ -26,7 +26,7 @@ export function Hero() {
       <SiteHeader />
       <HeroOrnaments />
 
-      <div className="relative mx-auto flex max-w-[1200px] flex-col items-center px-5 pt-6 pb-0 text-center md:px-0 md:pt-10">
+      <div className="relative z-10 mx-auto flex max-w-[1200px] flex-col items-center px-5 pt-6 pb-0 text-center md:px-0 md:pt-10">
         <h1 className="enter enter-1 t-display-xl max-w-[980px] text-on-dark">
           Get Access to Hundreds Courses Available
         </h1>
