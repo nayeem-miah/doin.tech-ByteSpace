@@ -180,7 +180,7 @@ export function FeatureBand({
             alt=""
             width={577}
             height={540}
-            className="w-[300px] max-w-full object-contain lg:pointer-events-none lg:absolute lg:top-[12px] lg:left-0 lg:w-[577px] lg:max-w-none"
+            className="w-full max-w-[373px] object-contain lg:pointer-events-none lg:absolute lg:top-[12px] lg:left-0 lg:w-[577px] lg:max-w-none"
           />
 
           <div className="w-full max-w-[320px] lg:contents">
@@ -218,7 +218,7 @@ export function FeatureBand({
             alt=""
             width={435}
             height={596}
-            className="w-[260px] max-w-full object-contain lg:absolute lg:top-0 lg:left-[28px] lg:w-[435px] lg:max-w-none"
+            className="w-full max-w-[373px] object-contain lg:absolute lg:top-0 lg:left-[28px] lg:w-[435px] lg:max-w-none"
           />
 
           <TintedShape
