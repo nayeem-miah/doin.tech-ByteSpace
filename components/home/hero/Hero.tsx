@@ -38,14 +38,14 @@ export function Hero() {
 
         <SearchField id="hero-search" className="enter enter-3 mt-8 max-w-[581px]" />
 
-        <figure className="enter enter-4 relative mt-6 h-[440px] w-full sm:h-[520px] md:mt-10 md:h-[600px]">
+        <figure className="enter enter-4 relative mt-6 w-full md:mt-10 md:h-[600px]">
           <Image
             src="/assets/creator-photo.png"
             alt=""
             width={578}
             height={541}
             priority
-            className="absolute bottom-0 left-1/2 h-[420px] w-auto -translate-x-1/2 object-contain sm:h-[480px] md:h-[600px]"
+            className="mx-auto block w-full max-w-full object-contain md:absolute md:bottom-0 md:left-1/2 md:h-[600px] md:w-auto md:max-w-none md:-translate-x-1/2"
           />
 
           <CourseProofCard
