@@ -183,7 +183,12 @@ export function FeatureBand({
             className="w-full max-w-[373px] object-contain lg:pointer-events-none lg:absolute lg:top-[12px] lg:left-0 lg:w-[577px] lg:max-w-none"
           />
 
-          <div className="w-full max-w-[373px] lg:contents">
+          {/* The photograph is a cutout whose frame ends mid-torso, so a
+              clean 24px gap below it reads as a sliced person. Pulling the
+              card up by 48px against the 24px gutter leaves a 24px overlap,
+              which both hides the cut and mirrors the designed overlap the
+              absolute placement produces at lg. */}
+          <div className="relative z-10 -mt-12 w-full max-w-[373px] lg:contents">
             <LearningProgressCard className="lg:absolute lg:top-[213px] lg:left-[345px]" />
           </div>
 
@@ -227,7 +232,8 @@ export function FeatureBand({
             className="hidden lg:absolute lg:top-[114px] lg:left-[305px] lg:block lg:size-[215px]"
           />
 
-          <div className="w-full max-w-[373px] lg:contents">
+          {/* Same overlap reasoning as the growth row above. */}
+          <div className="relative z-10 -mt-12 w-full max-w-[373px] lg:contents">
             <HappyStudentsCard className="lg:absolute lg:top-[413px] lg:left-[283px]" />
           </div>
         </div>
