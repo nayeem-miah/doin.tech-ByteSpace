@@ -55,7 +55,7 @@ export function FilterableCourseGrid({
               // Mobile: one swipeable strip with the scrollbar hidden. It
               // stays inside the page gutter rather than bleeding, so the
               // first pill always sits on the content edge.
-              "no-scrollbar snap-x snap-mandatory overflow-x-auto",
+              "no-scrollbar scroll-fade snap-x snap-mandatory overflow-x-auto",
               // sm and up: the designed wrap, centred.
               "sm:snap-none sm:flex-wrap sm:justify-center sm:overflow-visible",
               "flex gap-4",

@@ -326,6 +326,26 @@
     display: none;
   }
 
+  /* Fades the trailing edge of a swipe strip so a clipped item reads as
+     scrollable rather than broken. Mobile only; the wrap layout from sm
+     up never clips. */
+  @media (max-width: 639px) {
+    .scroll-fade {
+      -webkit-mask-image: linear-gradient(
+        to right,
+        #000 0,
+        #000 calc(100% - 36px),
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        to right,
+        #000 0,
+        #000 calc(100% - 36px),
+        transparent 100%
+      );
+    }
+  }
+
   .tab-pill {
     transition:
       background-color 200ms var(--ease-out),

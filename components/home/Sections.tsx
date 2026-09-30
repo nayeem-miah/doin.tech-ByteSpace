@@ -92,12 +92,16 @@ export function LearningPathsSection() {
         {/* 36px rather than the design's 40px: six 167px tiles plus five
             40px gutters is 1202px, two wider than the 1200px page
             container, which pushed the sixth tile onto its own row. */}
-        <ul className="mt-10 flex flex-wrap justify-center gap-9">
+        {/* A grid, not a wrapping flex row: six fixed 167px tiles cannot
+            fit two across a 336px phone, so flex put one per row and the
+            section ran six screens tall. The tile scales to its cell
+            below lg and takes the designed 167px from there. */}
+        <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
           {learningPaths.map((path) => (
             <li key={path.label}>
               <a
                 href="#"
-                className="press flex size-[167px] flex-col items-center justify-center gap-3 rounded-lg border border-line bg-white transition-colors duration-200 hover:border-ink"
+                className="press mx-auto flex aspect-square w-full max-w-[167px] flex-col items-center justify-center gap-3 rounded-lg border border-line bg-white transition-colors duration-200 hover:border-ink"
               >
                 <span className="grid size-[60px] place-items-center rounded-[40px] bg-lime">
                   <CategoryIcon name={path.icon} size={36} className="text-ink" />
