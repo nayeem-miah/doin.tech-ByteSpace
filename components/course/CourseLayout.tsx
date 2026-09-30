@@ -3,6 +3,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CourseHero } from "./CourseHero";
 import { CourseTabs } from "./CourseTabs";
 import { EnrolCard } from "./EnrolCard";
+import { Reveal } from "@/components/ui/Reveal";
 
 /**
  * Shared shell for the three course tabs.
@@ -35,9 +36,13 @@ export function CourseLayout({
 
       <main className="bg-white">
         <div className="mx-auto max-w-[1200px] px-5 pt-12 pb-20 md:px-0 md:pt-16 md:pb-28">
-          <CourseTabs slug={slug} />
+          <Reveal from="fade">
+            <CourseTabs slug={slug} />
+          </Reveal>
           <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_412px] lg:gap-10">
-            {children}
+            <Reveal from="up" delay={90}>
+              {children}
+            </Reveal>
           </div>
         </div>
       </main>
