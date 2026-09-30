@@ -1,7 +1,6 @@
 import { Hero } from "@/components/home/hero";
 import {
   DiscoverSection,
-  FeaturedCategoriesBar,
   FeatureBand,
   LearningPathsSection,
   LogoStrip,
@@ -18,7 +17,6 @@ export default function HomePage() {
       <main>
         <DiscoverSection />
         <LearningPathsSection />
-        <FeaturedCategoriesBar />
         <FeatureBand stats={stats} />
         <CreatorCta />
         <TestimonialsSection />

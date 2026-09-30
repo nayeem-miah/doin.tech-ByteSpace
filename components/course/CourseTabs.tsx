@@ -5,17 +5,22 @@ import { usePathname } from "next/navigation";
 import { Icon, type IconName } from "@/components/ui/icons";
 
 const TABS: { label: string; segment: string; icon: IconName }[] = [
-  { label: "Details", segment: "", icon: "align-left" },
+  { label: "About", segment: "", icon: "align-left" },
   { label: "Lessons", segment: "/lessons", icon: "play-circle" },
   { label: "Reviews", segment: "/reviews", icon: "star-blue" },
 ];
 
-/** Details / Lessons / Reviews switcher shared by the three course pages. */
+/**
+ * About / Lessons / Reviews switcher shared by the three course pages.
+ *
+ * Same pill language as the category filters: the active tab is the lime
+ * fill and the rest sit on the surface grey, with no border on either.
+ */
 export function CourseTabs({ slug }: { slug: string }) {
   const pathname = usePathname();
   return (
     <nav aria-label="Course sections">
-      <ul className="flex flex-wrap gap-3">
+      <ul className="flex flex-wrap gap-4">
         {TABS.map((tab) => {
           const href = `/courses/${slug}${tab.segment}`;
           const active = pathname === href;
@@ -25,10 +30,10 @@ export function CourseTabs({ slug }: { slug: string }) {
                 href={href}
                 aria-current={active ? "page" : undefined}
                 className={[
-                  "press t-h-s inline-flex items-center gap-2 rounded-full border px-5 py-2.5",
+                  "press t-body-l inline-flex items-center gap-2 rounded-full px-4 py-3 font-medium",
                   active
-                    ? "border-brand bg-brand text-white"
-                    : "border-line bg-white text-muted hover:border-ink hover:text-ink",
+                    ? "bg-lime text-ink"
+                    : "bg-surface text-muted hover:text-ink",
                 ].join(" ")}
               >
                 <Icon name={tab.icon} size={18} />
