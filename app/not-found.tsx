@@ -1,41 +1,60 @@
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/layout/PageHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = { title: "Page not found" };
 
+/**
+ * 404: a brand-blue band carrying the numeral, the message and the way
+ * back, then the footer. The numeral is 480px Poppins with a vertical
+ * gradient that fades the lime out toward the bottom of the glyphs, so
+ * it reads as a soft cut rather than a flat fill.
+ */
 export default function NotFound() {
   return (
     <>
-      <PageHeader title="Page not found" />
+      <section className="relative overflow-hidden bg-brand text-on-dark">
+        <SiteHeader />
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.07) 1px, transparent 1px)",
+            backgroundSize: "120px 120px",
+          }}
+        />
 
-      <main className="bg-white">
-        <div className="mx-auto flex max-w-[1200px] flex-col items-center px-5 py-24 text-center md:px-0 md:py-32">
+        <div className="relative mx-auto flex max-w-[1200px] flex-col items-center px-5 pt-16 pb-24 text-center md:px-0 md:pt-20 md:pb-32">
           <p
             aria-hidden="true"
-            className="t-display-xl bg-gradient-to-b from-lime to-transparent bg-clip-text text-transparent"
-            style={{ fontSize: "180px", lineHeight: 1 }}
+            className="font-[family-name:var(--font-poppins)] text-[clamp(180px,33vw,480px)] leading-[0.72] font-semibold"
+            style={{
+              letterSpacing: "-0.01em",
+              backgroundImage:
+                "linear-gradient(to bottom, rgba(212,251,32,1) 0%, rgba(212,251,32,0.96) 25%, rgba(212,251,32,0.81) 50%, rgba(212,251,32,0.61) 68%, rgba(255,255,255,0) 100%)",
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              color: "transparent",
+            }}
           >
             404
           </p>
-          <h1 className="t-display-lg mt-6 text-ink">
-            We could not find that page
+
+          <h1 className="t-display-xl mt-10 max-w-[934px] text-on-dark">
+            The page you are looking for doesn&rsquo;t exist
           </h1>
-          <p className="t-body-l mt-4 max-w-[52ch] text-body">
-            The page you are looking for may have been moved or no longer
-            exists. Head back to the catalogue to keep exploring.
+
+          <p className="t-body-l mt-10 text-[#e5e6e8]">
+            Try to use a correct url or go back to homepage to start again
           </p>
-          <div className="mt-9 flex flex-wrap justify-center gap-4">
-            <Button href="/" variant="primary" size="lg">
-              Back to Home
-            </Button>
-            <Button href="/courses" variant="outline" size="lg">
-              Browse Courses
-            </Button>
-          </div>
+
+          <Button href="/" variant="lime" size="lg" className="mt-8">
+            Back to Home
+          </Button>
         </div>
-      </main>
+      </section>
 
       <SiteFooter />
     </>

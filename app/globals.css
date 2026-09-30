@@ -208,10 +208,21 @@
 
 /* ==========================================================================
    Motion
+
+   House rules, applied throughout:
+   - transform and opacity only, so everything stays on the compositor
+   - no scroll listeners anywhere; entrances are driven by
+     IntersectionObserver, which fires once and disconnects
+   - CSS transitions rather than keyframes for anything the user can
+     interrupt (hovers, tab changes), so a retarget never restarts
+   - UI feedback under 300ms, entrances slower
+   - everything collapses under prefers-reduced-motion
    ========================================================================== */
 
 @layer utilities {
-  /* Press feedback, gated so touch devices do not fire phantom hovers. */
+  /* --- Press feedback ---------------------------------------------------
+     Gated behind (hover: hover) so touch devices, which fire hover on
+     tap, do not get phantom lifts. */
   @media (hover: hover) and (pointer: fine) {
     .press {
       transition: transform 160ms var(--ease-out);
@@ -224,19 +235,95 @@
     }
   }
 
+  /* --- Entrance ---------------------------------------------------------
+     One class, four origins. Children of a .stagger container each pick
+     up a delay from --i, set inline by the Stagger component. */
   .reveal {
     opacity: 0;
-    transform: translateY(16px);
     transition:
       opacity 600ms var(--ease-out),
       transform 600ms var(--ease-out);
+    transition-delay: var(--i, 0ms);
   }
   .reveal.is-visible {
     opacity: 1;
+  }
+
+  .reveal-up {
+    transform: translateY(20px);
+  }
+  .reveal-left {
+    transform: translateX(-20px);
+  }
+  .reveal-scale {
+    transform: scale(0.97);
+  }
+  .reveal-fade {
     transform: none;
   }
 
-  /* Progress fill grows from the left edge; transform only, never width. */
+  .reveal-up.is-visible,
+  .reveal-left.is-visible,
+  .reveal-scale.is-visible,
+  .reveal-fade.is-visible {
+    transform: none;
+  }
+
+  /* --- Hero entrance ----------------------------------------------------
+     Runs once on load, no observer needed. The copy rises in sequence so
+     the eye lands on the headline, then the field, then the figure. */
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .enter {
+    opacity: 0;
+    animation: rise 700ms var(--ease-out) forwards;
+  }
+  .enter-1 { animation-delay: 60ms; }
+  .enter-2 { animation-delay: 140ms; }
+  .enter-3 { animation-delay: 220ms; }
+  .enter-4 { animation-delay: 320ms; }
+
+  /* --- Card hover -------------------------------------------------------
+     A short lift plus a slow image zoom. Transform only, and the zoom is
+     500ms so it reads as a settle rather than a jump. */
+  @media (hover: hover) and (pointer: fine) {
+    .card-lift {
+      transition:
+        transform 200ms var(--ease-out),
+        box-shadow 200ms var(--ease-out);
+    }
+    .card-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-e4);
+    }
+    .card-lift:hover .card-zoom {
+      transform: scale(1.05);
+    }
+  }
+  .card-zoom {
+    transition: transform 500ms var(--ease-in-out);
+  }
+
+  /* --- Nav underline ----------------------------------------------------
+     A transition rather than a keyframe so switching tabs mid-animation
+     retargets smoothly instead of restarting. */
+  .tab-pill {
+    transition:
+      background-color 200ms var(--ease-out),
+      color 200ms var(--ease-out);
+  }
+
+  /* --- Progress fill ----------------------------------------------------
+     scaleX from the left edge; animating width would relayout. */
   .progress-fill {
     transform: scaleX(0);
     transform-origin: left center;
@@ -246,6 +333,9 @@
     transform: scaleX(1);
   }
 
+  /* --- Reduced motion ---------------------------------------------------
+     Nothing below this point needs a JS branch: the classes above all
+     resolve to their end state. */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -258,6 +348,10 @@
     .reveal {
       opacity: 1;
       transform: none;
+    }
+    .enter {
+      opacity: 1;
+      animation: none;
     }
     .progress-fill {
       transform: scaleX(1);

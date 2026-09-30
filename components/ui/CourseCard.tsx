@@ -19,7 +19,7 @@ export function CourseCard({
   priority?: boolean;
 }) {
   return (
-    <article className="press group h-full w-full">
+    <article className="card-lift group h-full w-full">
       <Link
         href={`/courses/${course.slug}`}
         className="flex h-full w-full flex-col overflow-hidden rounded-lg border border-line bg-white"
@@ -32,7 +32,7 @@ export function CourseCard({
             fill
             priority={priority}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 373px"
-            className="object-cover"
+            className="card-zoom object-cover"
           />
           <ul className="absolute bottom-3 left-3 flex gap-3">
             <MetaPill>{course.lessons} Lessons</MetaPill>

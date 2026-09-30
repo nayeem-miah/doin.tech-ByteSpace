@@ -45,8 +45,10 @@ export function DiscoverSection() {
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-[1200px] px-5 py-20 md:px-0 md:py-24">
-        <div className="max-w-[720px]">
-          <h2 className="t-display-lg text-brand-deep text-center">
+        {/* Centred as a block, so the copy centres on the page rather than
+            inside a left-anchored column. */}
+        <div className="mx-auto max-w-[720px] text-center">
+          <h2 className="t-display-lg text-brand-deep">
             Discover Your Passion, Build Your Skills
           </h2>
           <p className="t-body-l mt-5 text-body">
