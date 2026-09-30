@@ -35,7 +35,7 @@ export default function RegisterPage() {
             type="password"
             placeholder="********"
           />
-          <Button type="submit" variant="lime" size="md" className="self-end">
+          <Button type="submit" variant="lime" size="lg" className="self-end">
             Continue
           </Button>
         </form>

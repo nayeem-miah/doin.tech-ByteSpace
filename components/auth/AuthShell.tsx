@@ -216,7 +216,7 @@ export function AuthField({
         name={id}
         type={type}
         placeholder={placeholder}
-        className="t-body-l h-[52px] w-full rounded-sm border border-line bg-white px-4 text-ink transition-colors duration-200 focus:border-ink focus:outline-none"
+        className="t-body-l h-[46px] w-full rounded-sm border border-line bg-white px-4 text-ink sm:h-[52px] transition-colors duration-200 focus:border-ink focus:outline-none"
       />
     </div>
   );
