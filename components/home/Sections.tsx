@@ -167,8 +167,11 @@ export function FeatureBand({
           </dl>
         </div>
 
-        <div className="relative h-[552px]">
-          <div className="absolute top-0 left-0 w-[373px]">
+        {/* The designed overlap needs the full 621px column. Below lg the
+            pieces stack instead, because a 577px photograph has nowhere
+            to overlap a 373px card on a 375px screen. */}
+        <div className="relative mt-10 flex flex-col items-center gap-6 lg:mt-0 lg:block lg:h-[552px]">
+          <div className="w-full max-w-[373px] lg:absolute lg:top-0 lg:left-0 lg:max-w-none">
             <CourseCard course={courses[0]} />
           </div>
 
@@ -177,50 +180,56 @@ export function FeatureBand({
             alt=""
             width={577}
             height={540}
-            className="pointer-events-none absolute top-[12px] left-0 w-[577px] max-w-none object-contain"
+            className="w-[300px] max-w-full object-contain lg:pointer-events-none lg:absolute lg:top-[12px] lg:left-0 lg:w-[577px] lg:max-w-none"
           />
 
-          <LearningProgressCard className="absolute top-[213px] left-[345px]" />
+          <div className="w-full max-w-[320px] lg:contents">
+            <LearningProgressCard className="lg:absolute lg:top-[213px] lg:left-[345px]" />
+          </div>
 
           <TintedShape
             src="/assets/hero-float-6.png"
             tint="lime"
-            className="absolute top-[67px] left-[406px] size-[215px]"
+            className="hidden lg:absolute lg:top-[67px] lg:left-[406px] lg:block lg:size-[215px]"
           />
         </div>
       </div>
 
       {/* Row 2: creator. Offsets from the 541px left-hand column. */}
       <div className="relative mx-auto grid max-w-[1200px] items-center gap-14 px-5 pb-20 md:px-0 md:pb-28 lg:grid-cols-[541fr_580fr]">
-        <div className="relative h-[596px]">
-          <CreatorRevenueCard
-            className="absolute top-[44px] left-0"
-            title="Total Revenue"
-            period="July 1-28"
-            amount="$120.29"
-          />
-          <CreatorRevenueCard
-            className="absolute top-[194px] left-0"
-            title="Year to Date"
-            period="2023"
-            amount="$1,200.38"
-          />
+        <div className="relative mt-10 flex flex-col items-center gap-6 lg:mt-0 lg:block lg:h-[596px]">
+          <div className="flex w-full max-w-[320px] flex-col gap-4 lg:contents">
+            <CreatorRevenueCard
+              className="lg:absolute lg:top-[44px] lg:left-0"
+              title="Total Revenue"
+              period="July 1-28"
+              amount="$120.29"
+            />
+            <CreatorRevenueCard
+              className="lg:absolute lg:top-[194px] lg:left-0"
+              title="Year to Date"
+              period="2023"
+              amount="$1,200.38"
+            />
+          </div>
 
           <Image
             src="/assets/hero-person.png"
             alt=""
             width={435}
             height={596}
-            className="absolute top-0 left-[28px] w-[435px] max-w-none object-contain"
+            className="w-[260px] max-w-full object-contain lg:absolute lg:top-0 lg:left-[28px] lg:w-[435px] lg:max-w-none"
           />
 
           <TintedShape
             src="/assets/hero-float-6.png"
             tint="lime"
-            className="absolute top-[114px] left-[305px] size-[215px]"
+            className="hidden lg:absolute lg:top-[114px] lg:left-[305px] lg:block lg:size-[215px]"
           />
 
-          <HappyStudentsCard className="absolute top-[413px] left-[283px]" />
+          <div className="w-full max-w-[280px] lg:contents">
+            <HappyStudentsCard className="lg:absolute lg:top-[413px] lg:left-[283px]" />
+          </div>
         </div>
 
         <div>
