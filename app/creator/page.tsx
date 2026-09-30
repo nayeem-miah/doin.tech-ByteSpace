@@ -32,17 +32,22 @@ export default function CreatorPage() {
         />
 
         <div className="relative mx-auto max-w-[1200px] px-5 pt-10 pb-16 md:px-0 md:pt-12">
-          <div className="flex items-start gap-6">
+          {/* The design's single row only works at its 902px. Below sm an
+              80px avatar plus a 97px Follow button leave the name under
+              100px of a 321px row, which wrapped "PurePearl Studio" onto
+              two lines and the bio onto three. The button moves to its own
+              line so the name and badge keep one line each. */}
+          <div className="flex flex-wrap items-start gap-x-6 gap-y-4">
             <Avatar
               src="/assets/avatar-11.png"
               size={80}
               alt="PurePearl Studio"
-              className="border-4 border-white/20"
+              className="shrink-0 border-4 border-white/20"
             />
-            <div className="min-w-0 flex-1">
+            <div className="min-w-0 flex-1 basis-[200px] sm:basis-auto">
               <div className="flex flex-wrap items-center gap-3">
                 <h1 className="t-display-md text-on-dark">PurePearl Studio</h1>
-                <span className="t-body-l rounded-full bg-white px-3 py-1 text-ink">
+                <span className="t-body-l shrink-0 rounded-full bg-white px-3 py-1 text-ink">
                   Creator
                 </span>
               </div>
@@ -53,7 +58,7 @@ export default function CreatorPage() {
 
             <button
               type="button"
-              className="press t-h-s shrink-0 rounded-full bg-lime px-6 py-3 text-ink"
+              className="press t-h-s w-full shrink-0 rounded-full bg-lime px-6 py-3 text-ink sm:ml-auto sm:w-auto"
             >
               Follow
             </button>
