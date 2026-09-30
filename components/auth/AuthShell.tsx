@@ -53,7 +53,14 @@ export function AuthShell({
 
           {/* Right: the form card */}
           <div className="relative z-10">
-            <div className="rounded-lg bg-white p-9 shadow-e5">{children}</div>
+            {/* The design's card insets its content by 63px left and 61px
+                top, not a flat 36px - the old value left the fields
+                floating in the card on desktop. On a 375px screen that
+                padding cannot hold: 72px of a 321px card is padding and
+                the inputs drop to 249px, so it steps down to 20px. */}
+            <div className="rounded-lg bg-white p-5 shadow-e5 md:p-[61px] md:pl-[63px]">
+              {children}
+            </div>
           </div>
         </div>
 
