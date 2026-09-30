@@ -16,26 +16,30 @@ export function ReviewsBody() {
         <h2 className="t-display-sm text-ink">{d.heading}</h2>
         <p className="t-body-l mt-4 text-body">{d.body}</p>
 
-        {/* Summary: big average beside the star distribution */}
-        <div className="mt-8 flex flex-col gap-8 rounded-lg bg-white p-7 sm:flex-row sm:items-center sm:gap-12">
-          <div className="shrink-0">
+        {/* Summary: white card, radius 16, holding a lime block on the
+            left and the star distribution beside it. */}
+        <div className="mt-8 flex flex-col gap-6 rounded-md border border-line bg-white p-6 sm:flex-row sm:gap-6 sm:p-10">
+          <div className="shrink-0 self-start rounded-xs bg-lime px-10 py-8 text-center">
             <p className="t-label-lg text-ink">{d.averageLabel}</p>
-            <p className="t-display-lg mt-1 text-ink">{d.average}</p>
-            <StarRow value={Number(d.average)} className="mt-2" />
+            <p className="t-display-md mt-1 text-ink">{d.average}</p>
           </div>
 
           <ul className="flex-1">
             {d.breakdown.map((row) => (
-              <li key={row.stars} className="flex items-center gap-3">
-                <span className="t-body-s w-3 shrink-0 text-body">{row.stars}</span>
-                <Icon name="star-lime" size={14} className="shrink-0 text-lime" />
+              <li key={row.stars} className="flex items-center gap-4 py-1">
+                <span className="t-body-l w-4 shrink-0 text-center text-body">
+                  {row.stars}
+                </span>
+                <span className="grid size-6 shrink-0 place-items-center">
+                  <Icon name="star-lime" size={20} className="text-lime" />
+                </span>
                 <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-surface">
                   <span
                     className="block h-full rounded-full bg-lime"
                     style={{ width: `${(Number(row.count) / max) * 100}%` }}
                   />
                 </span>
-                <span className="t-body-s w-10 shrink-0 text-right text-body">
+                <span className="t-body-l w-12 shrink-0 text-right text-body">
                   {row.count}
                 </span>
               </li>
@@ -77,7 +81,7 @@ export function ReviewsBody() {
           {d.items.map((r) => (
             <li
               key={r.name}
-              className="rounded-lg border border-line bg-white p-6"
+              className="rounded-lg border border-line bg-white p-6 md:p-10"
             >
               <div className="flex items-center gap-4">
                 <Avatar src="/assets/avatar-11.png" size={43} alt={r.name} />
